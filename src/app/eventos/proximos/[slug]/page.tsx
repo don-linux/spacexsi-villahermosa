@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import { EventGallery } from '@/features/events/event-gallery';
 import { LumaTicket } from '@/features/events/luma-ticket';
 import type { EventImage } from '@/features/events/types';
-import { getUpcomingMeetup, upcomingMeetup } from '@/features/events/upcoming';
+import { getUpcomingMeetup, upcomingEvents } from '@/features/events/upcoming';
 
 const noPhotos: EventImage[] = [];
 
@@ -14,7 +14,8 @@ const noPhotos: EventImage[] = [];
 const UNSCHEDULED_SLUG = '_';
 
 export function generateStaticParams() {
-  return [{ slug: upcomingMeetup?.slug ?? UNSCHEDULED_SLUG }];
+  if (upcomingEvents.length === 0) return [{ slug: UNSCHEDULED_SLUG }];
+  return upcomingEvents.map((event) => ({ slug: event.slug }));
 }
 
 type EventPageProps = {

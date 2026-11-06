@@ -1,10 +1,13 @@
 import { cursorMeetupVillahermosa } from './2026-11-cursor-meetup-villahermosa/event';
+import { hackatonNacionalVillahermosa } from './2026-11-hackaton-nacional-villahermosa/event';
 import type { UpcomingMeetup } from './types';
 
-/** The single planned meetup. Null until the next one is scheduled. */
-export const upcomingMeetup: UpcomingMeetup | null = cursorMeetupVillahermosa;
+/** Planned events, soonest first. Empty until the next one is scheduled. */
+export const upcomingEvents: readonly UpcomingMeetup[] = [
+  cursorMeetupVillahermosa,
+  hackatonNacionalVillahermosa,
+];
 
 export function getUpcomingMeetup(slug: string): UpcomingMeetup | undefined {
-  if (upcomingMeetup?.slug !== slug) return undefined;
-  return upcomingMeetup;
+  return upcomingEvents.find((event) => event.slug === slug);
 }

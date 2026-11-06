@@ -3,11 +3,13 @@ import type { CSSProperties } from 'react';
 
 import { ArrowUpRightIcon } from '@/components/ui/icons';
 import { Pill } from '@/components/ui/pill';
-import { upcomingMeetup } from '@/features/events/upcoming';
+import { upcomingEvents } from '@/features/events/upcoming';
 
 import { SpaceXSIWordmark } from './spacexsi-wordmark';
 
-const CURSOR_MEETUP_HREF = upcomingMeetup ? `/eventos/proximos/${upcomingMeetup.slug}` : '#';
+const CURSOR_MEETUP_SLUG = 'cursor-meetup-villahermosa-2026-11';
+const cursorMeetup = upcomingEvents.find((event) => event.slug === CURSOR_MEETUP_SLUG);
+const CURSOR_MEETUP_HREF = cursorMeetup ? `/eventos/proximos/${cursorMeetup.slug}` : '#';
 
 function revealDelay(ms: number) {
   return { '--reveal-delay': `${ms}ms` } as CSSProperties;

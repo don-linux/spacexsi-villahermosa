@@ -5,7 +5,7 @@ description: Antes de programar el siguiente meetup, comprueba que esten la foto
 
 # Upcoming meetups checker
 
-Hay un solo hueco: `upcomingMeetup` en `src/features/events/upcoming.ts`. Si ya no es `null`, no agregues otro. Di que primero hay que pasar el que esta planeado al archivo, con el subagente `past-meetups-migrator`.
+Los proximos viven en `upcomingEvents`, en `src/features/events/upcoming.ts`. Van ordenados por fecha, el mas cercano primero. Puedes agregar otro aunque la lista ya tenga eventos. No archives uno que todavia no ocurre.
 
 No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, deten la creacion y lista exactamente lo que falta. No inventes fotos, links, titulos ni nombres.
 
@@ -13,7 +13,7 @@ No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, det
 
 - Foto de portada de Luma. Es la cara del listado y del ticket. No es una foto del lugar.
 - Link de Luma, con la forma `https://luma.com/...`.
-- Un flyer por charla. De cada uno: el archivo de imagen, el titulo y el nombre tal como estan impresos en el flyer.
+- Un flyer por charla. De cada uno: el archivo de imagen, el titulo y el nombre tal como estan impresos en el flyer. Si el evento no tiene charlas, una pieza de programa con el titulo impreso y quien lo organiza.
 
 ## Texto de la tarjeta
 
@@ -25,5 +25,5 @@ No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, det
 
 1. Copia los archivos a una carpeta nueva bajo `src/features/events/`, sin mover ni borrar los originales que te pasaron.
 2. Importa cada imagen con una ruta literal.
-3. Sustituye `null` por un objeto `UpcomingMeetup`. `lumaUrl` es obligatorio. Este tipo no lleva `photos`.
-4. El listado en `/eventos/proximos` es una sola tarjeta grande, sin selector de vista. La pagina del evento muestra el ticket de Luma y el programa, no la galeria.
+3. Agrega el objeto `UpcomingMeetup` a `upcomingEvents`. `lumaUrl` es obligatorio. Este tipo no lleva `photos`.
+4. Con un solo proximo, `/eventos/proximos` es una tarjeta grande, sin selector de vista. Con varios, una rejilla. La pagina del evento muestra el ticket de Luma y el programa, no la galeria.
