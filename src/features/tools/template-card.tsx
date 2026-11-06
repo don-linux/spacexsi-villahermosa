@@ -120,11 +120,7 @@ function FlipCard({
             {template.description}
           </p>
 
-          <div className="mt-5 flex flex-col gap-4" style={cardFont}>
-            <ChipList label="Habilidades" items={template.skills} />
-            <ChipList label="Rutinas" items={template.routines} />
-            <ChipList label="Plugins" items={template.plugins} />
-          </div>
+          <ChipGroups template={template} />
 
           <div className="mt-6 flex justify-center border-t border-foreground/[0.06] pt-4">
             <AddLink href={template.href} />
@@ -218,6 +214,24 @@ function AddLink({ href }: { href: string }) {
 
 function stopCardFlip(event: MouseEvent<HTMLAnchorElement>) {
   event.stopPropagation();
+}
+
+function ChipGroups({ template }: { template: CommunityTemplate }) {
+  const groups = [
+    { label: 'Habilidades', items: template.skills },
+    { label: 'Rutinas', items: template.routines },
+    { label: 'Plugins', items: template.plugins },
+  ].filter((group) => group.items.length > 0);
+
+  if (groups.length === 0) return null;
+
+  return (
+    <div className="mt-5 flex flex-col gap-4" style={cardFont}>
+      {groups.map((group) => (
+        <ChipList key={group.label} label={group.label} items={group.items} />
+      ))}
+    </div>
+  );
 }
 
 function ChipList({ label, items }: { label: string; items: string[] }) {
