@@ -62,12 +62,16 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                     src={flyer.src}
                     alt={flyer.alt}
                     sizes="(min-width: 640px) 50vw, 100vw"
+                    unoptimized={flyer.unoptimized}
                     className="h-auto w-full"
                     style={{ width: '100%', height: 'auto' }}
                   />
                 </button>
                 <figcaption className="mt-3 text-sm">
                   <span className="block text-foreground">{flyer.title}</span>
+                  {flyer.subtitle ? (
+                    <span className="mt-0.5 block text-foreground/70">{flyer.subtitle}</span>
+                  ) : null}
                   <span className="mt-0.5 block text-foreground/55">{flyer.speaker}</span>
                 </figcaption>
               </figure>
@@ -132,6 +136,7 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                 alt={frame.alt}
                 fill
                 sizes="100vw"
+                unoptimized={frame.unoptimized}
                 className="object-contain"
               />
             </div>

@@ -56,6 +56,7 @@ async function UpcomingMeetupContent({ params }: EventPageProps) {
       <h1 className="page-title mt-4 text-4xl md:text-5xl">{event.title}</h1>
       <p className="mt-4 text-base text-foreground/70">{event.date}</p>
       <p className="mt-1 text-base text-foreground/70">{event.venue}</p>
+      <p className="mt-4 max-w-2xl text-foreground/60">{event.summary}</p>
       <div className="mt-10">
         <LumaTicket href={event.lumaUrl} image={event.cover} />
       </div>

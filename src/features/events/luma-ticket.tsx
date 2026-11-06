@@ -18,6 +18,7 @@ export function LumaTicket({ href, image }: { href: string; image: EventImage })
           alt={image.alt}
           sizes="(min-width: 768px) 28rem, 100vw"
           preload
+          unoptimized={image.unoptimized}
           className="h-auto w-full"
           style={{ width: '100%', height: 'auto' }}
         />

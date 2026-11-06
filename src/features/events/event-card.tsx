@@ -12,7 +12,7 @@ export type PastEventCardData = {
   city: string;
   venue: string;
   lumaUrl?: string;
-  cover: { src: StaticImageData; alt: string };
+  cover: { src: StaticImageData; alt: string; unoptimized?: boolean };
 };
 
 type Presentation = 'feature' | 'grid' | 'list';
@@ -74,6 +74,7 @@ export function EventCard({
           alt=""
           fill
           sizes={coverSizes(presentation)}
+          unoptimized={event.cover.unoptimized}
           className="object-contain"
           preload={preload}
         />

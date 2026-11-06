@@ -3,10 +3,13 @@ import type { StaticImageData } from 'next/image';
 export type EventImage = {
   src: StaticImageData;
   alt: string;
+  /** Skip the image optimizer so the file is served as stored. */
+  unoptimized?: boolean;
 };
 
 export type EventFlyer = EventImage & {
   title: string;
+  subtitle?: string;
   speaker: string;
 };
 
