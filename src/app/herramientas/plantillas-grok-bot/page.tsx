@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { TemplateBrowser } from "@/components/tools/template-browser";
-import { getToolSection } from "@/content/tools/sections";
-import { templatesForSection } from "@/content/tools/templates";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-const section = getToolSection("plantillas-grok-bot");
+import { getToolSection } from '@/features/tools/sections';
+import { TemplateBrowser } from '@/features/tools/template-browser';
+import { templatesForSection } from '@/features/tools/templates';
+
+const section = getToolSection('plantillas-grok-bot');
 
 export const metadata: Metadata = {
-  title: "Plantillas de Grok Bot · SpaceXAI Villahermosa",
-  description: section?.description ?? "Plantillas de Grok Bot de la comunidad.",
+  title: 'Plantillas de Grok Bot · SpaceXAI Villahermosa',
+  description: section?.description ?? 'Plantillas de Grok Bot de la comunidad.',
 };
 
 export default function GrokBotTemplatesPage() {

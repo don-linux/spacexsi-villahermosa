@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-import { EventCard, type PastEventCardData } from "@/components/events/event-card";
-import { GROK_BOT_SILHOUETTE_MARKS, GrokBotMark } from "@/components/grok-bot-mark";
-import { upcomingMeetup } from "@/content/events/upcoming";
+import type { Metadata } from 'next';
+
+import { GROK_BOT_SILHOUETTE_MARKS, GrokBotMark } from '@/components/ui/grok-bot-mark';
+import { EventCard, type PastEventCardData } from '@/features/events/event-card';
+import { upcomingMeetup } from '@/features/events/upcoming';
 
 export const metadata: Metadata = {
-  title: "Proximos meetups · SpaceXAI Villahermosa",
-  description: "El siguiente meetup de SpaceXAI en Villahermosa.",
+  title: 'Proximos meetups · SpaceXAI Villahermosa',
+  description: 'El siguiente meetup de SpaceXAI en Villahermosa.',
 };
 
 const EMPTY_COPY =
-  "Ups! Por el momento no hay eventos planeados, vuelve aqui despues para ver si hay algo ;)";
+  'Ups! Por el momento no hay eventos planeados, vuelve aqui despues para ver si hay algo ;)';
 
 const card: PastEventCardData | null = upcomingMeetup
   ? {
@@ -33,12 +34,7 @@ export default function UpcomingMeetupsPage() {
       {card ? (
         <ul className="mt-8">
           <li>
-            <EventCard
-              event={card}
-              presentation="feature"
-              hrefBase="/eventos/proximos"
-              preload
-            />
+            <EventCard event={card} presentation="feature" hrefBase="/eventos/proximos" preload />
           </li>
         </ul>
       ) : (

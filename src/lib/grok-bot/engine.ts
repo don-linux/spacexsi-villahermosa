@@ -1,8 +1,8 @@
-import { arcRender, type ArcRender, type DotRender } from "./decor";
-import { blendExpression, type BotExpression } from "./expressions";
-import { decalageDesYeux } from "./eyefit";
-import { blinkScale, eyePoses, liveliness } from "./face";
-import { clamp, easings, lerp, r2 } from "./math";
+import { arcRender, type ArcRender, type DotRender } from './decor';
+import { blendExpression, type BotExpression } from './expressions';
+import { decalageDesYeux } from './eyefit';
+import { blinkScale, eyePoses, liveliness } from './face';
+import { clamp, easings, lerp, r2 } from './math';
 import {
   blend,
   capsulePath,
@@ -11,8 +11,8 @@ import {
   toPoints,
   type Point,
   type Silhouette,
-} from "./shape";
-import { STATE_BY_ID, type Pose, type StateDef, type StateId } from "./states";
+} from './shape';
+import { STATE_BY_ID, type Pose, type StateDef, type StateId } from './states';
 
 export interface RenderedEye {
   d: string;
@@ -82,7 +82,7 @@ const lerpLook = (a: Look, b: Look, t: number): Look => ({
   wander: lerp(a.wander, b.wander, t),
 });
 
-const lerpEye = (a: Pose["eyes"][number], b: Pose["eyes"][number], t: number) => ({
+const lerpEye = (a: Pose['eyes'][number], b: Pose['eyes'][number], t: number) => ({
   w: lerp(a.w, b.w, t),
   h: lerp(a.h, b.h, t),
   open: lerp(a.open, b.open, t),
@@ -165,7 +165,7 @@ export class BotEngine {
 
   constructor(
     scale = 100,
-    initial: StateId = "idle",
+    initial: StateId = 'idle',
     shape: number[] | null = null,
     expression: BotExpression | null = null,
   ) {

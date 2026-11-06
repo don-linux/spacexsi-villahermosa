@@ -11,12 +11,12 @@ Hay algun meetup planeado para registrarlo despues de la migracion?
 
 ## Migrar el actual
 
-Si `upcomingMeetup` en `src/content/events/upcoming.ts` es `null`, no hay nada que migrar. Dilo y no inventes un evento pasado.
+Si `upcomingMeetup` en `src/features/events/upcoming.ts` es `null`, no hay nada que migrar. Dilo y no inventes un evento pasado.
 
 Si hay uno:
 
-1. Copia su carpeta al archivo de pasados, en `src/content/events/`. No borres los originales de promo hasta que la copia este registrada.
-2. Registralo al inicio de `pastEvents` en `src/content/events/index.ts`. El mas nuevo va primero.
+1. Copia su carpeta al archivo de pasados, en `src/features/events/`. No borres los originales de promo hasta que la copia este registrada.
+2. Registralo al inicio de `pastEvents` en `src/features/events/index.ts`. El mas nuevo va primero.
 3. El tipo pasado pide `photos`. Dejalo en `[]` si todavia no hay galeria.
 4. Vuelve `upcomingMeetup` a `null`.
 

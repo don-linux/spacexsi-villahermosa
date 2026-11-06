@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useSyncExternalStore } from "react";
-import { EventType } from "@rive-app/react-canvas";
-import type { Event as RiveEvent, Rive } from "@rive-app/react-canvas";
+import { EventType } from '@rive-app/react-canvas';
+import type { Event as RiveEvent, Rive } from '@rive-app/react-canvas';
+import { useEffect, useSyncExternalStore } from 'react';
 
-export const RIVE_SRC = "/brand/spacexai/spacexai-dark.riv";
-export const RIVE_ARTBOARD = "SPACE X WEB";
-export const RIVE_STATE_MACHINE = "SPACE X WEB";
+export const RIVE_SRC = '/brand/spacexai/spacexai-dark.riv';
+export const RIVE_ARTBOARD = 'SPACE X WEB';
+export const RIVE_STATE_MACHINE = 'SPACE X WEB';
 
 /** Artboard size, and where the X mark rests once the letters have collapsed into it. */
 export const RIVE_ARTBOARD_SIZE = { width: 1389, height: 257 };
@@ -20,12 +20,12 @@ const RIVE_PLAY_S = 1.5;
 /** Backstop in case frames stop advancing (e.g. a background tab). */
 const RIVE_MAX_MS = 5000;
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 function subscribeReducedMotion(onChange: () => void) {
   const query = window.matchMedia(REDUCED_MOTION_QUERY);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
 }
 
 export function usePrefersReducedMotion() {
@@ -47,7 +47,7 @@ export function useRiveSettled(rive: Rive | null, onSettled: () => void, run = 0
     let played = 0;
     const maxTimer = window.setTimeout(onSettled, RIVE_MAX_MS);
     const handleAdvance = (event: RiveEvent) => {
-      played += typeof event.data === "number" ? event.data : 0;
+      played += typeof event.data === 'number' ? event.data : 0;
       if (played < RIVE_PLAY_S) return;
       rive.off(EventType.Advance, handleAdvance);
       window.clearTimeout(maxTimer);

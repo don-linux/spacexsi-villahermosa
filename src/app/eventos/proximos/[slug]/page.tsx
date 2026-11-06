@@ -1,18 +1,21 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { EventGallery } from "@/components/events/event-gallery";
-import { LumaTicket } from "@/components/events/luma-ticket";
-import type { EventImage } from "@/content/events/types";
-import { getUpcomingMeetup, upcomingMeetup } from "@/content/events/upcoming";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
+
+import { EventGallery } from '@/features/events/event-gallery';
+import { LumaTicket } from '@/features/events/luma-ticket';
+import type { EventImage } from '@/features/events/types';
+import { getUpcomingMeetup, upcomingMeetup } from '@/features/events/upcoming';
 
 const noPhotos: EventImage[] = [];
 
-export function generateStaticParams() {
-  return upcomingMeetup ? [{ slug: upcomingMeetup.slug }] : [];
-}
+// Cache Components requires at least one param. With nothing planned, this slug 404s.
+const UNSCHEDULED_SLUG = '_';
 
-export const dynamicParams = false;
+export function generateStaticParams() {
+  return [{ slug: upcomingMeetup?.slug ?? UNSCHEDULED_SLUG }];
+}
 
 type EventPageProps = {
   params: Promise<{ slug: string }>;
@@ -21,14 +24,22 @@ type EventPageProps = {
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
   const { slug } = await params;
   const event = getUpcomingMeetup(slug);
-  if (!event) return { title: "Proximos meetups · SpaceXAI Villahermosa" };
+  if (!event) return { title: 'Proximos meetups · SpaceXAI Villahermosa' };
   return {
     title: `${event.title} · SpaceXAI Villahermosa`,
     description: event.summary,
   };
 }
 
-export default async function UpcomingMeetupPage({ params }: EventPageProps) {
+export default function UpcomingMeetupPage({ params }: EventPageProps) {
+  return (
+    <Suspense fallback={null}>
+      <UpcomingMeetupContent params={params} />
+    </Suspense>
+  );
+}
+
+async function UpcomingMeetupContent({ params }: EventPageProps) {
   const { slug } = await params;
   const event = getUpcomingMeetup(slug);
   if (!event) notFound();

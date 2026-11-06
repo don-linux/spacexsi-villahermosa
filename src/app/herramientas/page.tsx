@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import { ToolSectionsBrowser } from "@/components/tools/tool-sections-browser";
-import type { ToolSectionCardData } from "@/components/tools/section-card";
-import { templateCountLabel, TOOL_SECTIONS } from "@/content/tools/sections";
-import { templatesForSection } from "@/content/tools/templates";
+import type { Metadata } from 'next';
+
+import type { ToolSectionCardData } from '@/features/tools/section-card';
+import { templateCountLabel, TOOL_SECTIONS } from '@/features/tools/sections';
+import { templatesForSection } from '@/features/tools/templates';
+import { ToolSectionsBrowser } from '@/features/tools/tool-sections-browser';
 
 export const metadata: Metadata = {
-  title: "Herramientas de la comunidad · SpaceXAI Villahermosa",
-  description: "Herramientas creadas por la comunidad para la comunidad.",
+  title: 'Herramientas de la comunidad · SpaceXAI Villahermosa',
+  description: 'Herramientas creadas por la comunidad para la comunidad.',
 };
 
 const sections: ToolSectionCardData[] = TOOL_SECTIONS.map((section) => ({

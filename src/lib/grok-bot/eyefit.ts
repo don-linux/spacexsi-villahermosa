@@ -38,11 +38,11 @@
  * donc sans effet sur la purete de `engine.sample(t)`.
  */
 
-import { EXPRESSIONS, type BotExpression } from "./expressions";
-import { eyePoses } from "./face";
-import { radiusAtAngle, toPoints, type Point } from "./shape";
-import { SHAPES } from "./skins";
-import { STATES, type Pose, type StateDef, type StateId } from "./states";
+import { EXPRESSIONS, type BotExpression } from './expressions';
+import { eyePoses } from './face';
+import { radiusAtAngle, toPoints, type Point } from './shape';
+import { SHAPES } from './skins';
+import { STATES, type Pose, type StateDef, type StateId } from './states';
 
 /** Rayon de reference du solveur. Le decalage rendu est en unites de ce rayon. */
 const R = 100;
@@ -65,9 +65,9 @@ const DERIVE_Y = 0.007;
 
 /** Le visage d'une pose, ce dont le solveur a besoin pour placer ses gelules. */
 interface Visage {
-  gaze: Pose["gaze"];
+  gaze: Pose['gaze'];
   split: number;
-  eyes: Pose["eyes"];
+  eyes: Pose['eyes'];
 }
 
 /**
@@ -107,7 +107,7 @@ interface Empreinte {
  *
  * Le clignement n'y est pas : un oeil ferme n'a pas besoin qu'on lui fasse de la place.
  */
-function empreintes(visage: Visage, sil: Pose["sil"], radii: number[]): Empreinte[] {
+function empreintes(visage: Visage, sil: Pose['sil'], radii: number[]): Empreinte[] {
   const out: Empreinte[] = [];
   const poses = eyePoses(visage.gaze, R, visage.split);
   for (let i = 0; i < 2; i++) {
@@ -397,7 +397,7 @@ function decalagePour(
 const NUL = { x: 0, y: 0 } as const;
 
 /** Clef d'une entree : l'etat, et l'expression quand l'etat l'accepte. */
-const clef = (state: StateId, expr: string | null) => `${state}|${expr ?? ""}`;
+const clef = (state: StateId, expr: string | null) => `${state}|${expr ?? ''}`;
 
 /**
  * Table des decalages, batie a l'import : une entree par (forme, etat a corps de base,

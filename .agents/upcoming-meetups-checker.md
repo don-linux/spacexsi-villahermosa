@@ -5,7 +5,7 @@ description: Antes de programar el siguiente meetup, comprueba que esten la foto
 
 # Upcoming meetups checker
 
-Hay un solo hueco: `upcomingMeetup` en `src/content/events/upcoming.ts`. Si ya no es `null`, no agregues otro. Di que primero hay que pasar el que esta planeado al archivo, con el subagente `past-meetups-migrator`.
+Hay un solo hueco: `upcomingMeetup` en `src/features/events/upcoming.ts`. Si ya no es `null`, no agregues otro. Di que primero hay que pasar el que esta planeado al archivo, con el subagente `past-meetups-migrator`.
 
 No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, deten la creacion y lista exactamente lo que falta. No inventes fotos, links, titulos ni nombres.
 
@@ -23,7 +23,7 @@ No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, det
 
 ## Cuando ya esta todo
 
-1. Copia los archivos a una carpeta nueva bajo `src/content/events/`, sin mover ni borrar los originales que te pasaron.
+1. Copia los archivos a una carpeta nueva bajo `src/features/events/`, sin mover ni borrar los originales que te pasaron.
 2. Importa cada imagen con una ruta literal.
 3. Sustituye `null` por un objeto `UpcomingMeetup`. `lumaUrl` es obligatorio. Este tipo no lleva `photos`.
 4. El listado en `/eventos/proximos` es una sola tarjeta grande, sin selector de vista. La pagina del evento muestra el ticket de Luma y el programa, no la galeria.

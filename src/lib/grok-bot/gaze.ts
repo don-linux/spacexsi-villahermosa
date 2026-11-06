@@ -1,6 +1,6 @@
-import type { Look } from "./engine";
-import type { ExpressionId } from "./expressions";
-import { clamp, easings } from "./math";
+import type { Look } from './engine';
+import type { ExpressionId } from './expressions';
+import { clamp, easings } from './math';
 
 /**
  * Ou le bot regarde quand il suit le curseur. Pur, comme `src/ui/timeline.ts` :
@@ -74,12 +74,12 @@ export const TURN_TIME = 1.1;
  * ramenerait le saut.
  */
 export const HUMEURS: readonly ExpressionId[] = [
-  "surpris",
-  "heureux",
-  "hilare",
-  "excite",
-  "fier",
-  "blase",
+  'surpris',
+  'heureux',
+  'hilare',
+  'excite',
+  'fier',
+  'blase',
 ];
 
 /* ------------------------------------------------ regards de l'arrivee */

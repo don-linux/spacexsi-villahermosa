@@ -1,11 +1,11 @@
-import { PROFILE_SAMPLES } from "./profiles";
+import { PROFILE_SAMPLES } from './profiles';
 import {
   hullOfCircles,
   profileFromPolygon,
   regularPolygonProfile,
   superellipseProfile,
   unionOfCirclesProfile,
-} from "./shape";
+} from './shape';
 
 /**
  * Formes et couleurs proposees par le personnalisateur du bot.
@@ -25,14 +25,14 @@ import {
  * rendrait `radii` en lecture seule, alors que le moteur le passe tel quel.
  */
 export type ShapeId =
-  | "cercle"
-  | "galet"
-  | "squircle"
-  | "capsule"
-  | "triangle"
-  | "hexagone"
-  | "nuage"
-  | "goutte";
+  | 'cercle'
+  | 'galet'
+  | 'squircle'
+  | 'capsule'
+  | 'triangle'
+  | 'hexagone'
+  | 'nuage'
+  | 'goutte';
 
 export interface BotShape {
   id: ShapeId;
@@ -80,38 +80,38 @@ const droplet = normalize(
 const capsule = profileFromPolygon(hullOfCircles(-0.42, 0, 0.62, 0.42, 0, 0.62), 0, 0);
 
 export const SHAPES: BotShape[] = [
-  { id: "cercle", radii: new Array(PROFILE_SAMPLES).fill(1) },
-  { id: "galet", radii: pebble },
+  { id: 'cercle', radii: new Array(PROFILE_SAMPLES).fill(1) },
+  { id: 'galet', radii: pebble },
   // 1.15 et pas 1.02 : sur une superellipse le rayon maximal est la diagonale,
   // donc normaliser dessus donne une forme qui parait plus petite que le cercle.
-  { id: "squircle", radii: normalize(superellipseProfile(4.2), 1.15) },
-  { id: "capsule", radii: capsule },
+  { id: 'squircle', radii: normalize(superellipseProfile(4.2), 1.15) },
+  { id: 'capsule', radii: capsule },
   // -90deg : un sommet vers le haut de l'ecran (y est oriente vers le bas)
-  { id: "triangle", radii: regularPolygonProfile(3, 1.12, 0.34, -90) },
+  { id: 'triangle', radii: regularPolygonProfile(3, 1.12, 0.34, -90) },
   // 0deg : sommets a gauche et a droite, donc aretes du haut et du bas plates
-  { id: "hexagone", radii: regularPolygonProfile(6, 1.04, 0.26, 0) },
-  { id: "nuage", radii: cloud },
-  { id: "goutte", radii: droplet },
+  { id: 'hexagone', radii: regularPolygonProfile(6, 1.04, 0.26, 0) },
+  { id: 'nuage', radii: cloud },
+  { id: 'goutte', radii: droplet },
 ];
 
 // Map indexee par `string` et non par `ShapeId` : les appelants interrogent avec
 // une valeur relue du localStorage ou d'une prop, donc non validee.
 export const SHAPE_BY_ID = new Map<string, BotShape>(SHAPES.map((s) => [s.id, s]));
-export const DEFAULT_SHAPE = "cercle";
+export const DEFAULT_SHAPE = 'cercle';
 
 export type ColorId =
-  | "encre"
-  | "creme"
-  | "brun"
-  | "rouge"
-  | "orange"
-  | "ambre"
-  | "vert"
-  | "turquoise"
-  | "bleu"
-  | "violet"
-  | "rose"
-  | "gris";
+  | 'encre'
+  | 'creme'
+  | 'brun'
+  | 'rouge'
+  | 'orange'
+  | 'ambre'
+  | 'vert'
+  | 'turquoise'
+  | 'bleu'
+  | 'violet'
+  | 'rose'
+  | 'gris';
 
 export interface BotColor {
   id: ColorId;
@@ -120,22 +120,22 @@ export interface BotColor {
 
 /** Palette du personnalisateur d'origine. */
 export const COLORS: BotColor[] = [
-  { id: "encre", hex: "#0a0a0c" },
-  { id: "brun", hex: "#8b5e3c" },
-  { id: "rouge", hex: "#e8483f" },
-  { id: "orange", hex: "#f08a24" },
-  { id: "ambre", hex: "#f0b429" },
-  { id: "vert", hex: "#3ecf8e" },
-  { id: "turquoise", hex: "#2fbfa0" },
-  { id: "bleu", hex: "#3b93f0" },
-  { id: "violet", hex: "#8b5cf6" },
-  { id: "rose", hex: "#e152b0" },
-  { id: "gris", hex: "#a3a3a3" },
-  { id: "creme", hex: "#f1efe9" },
+  { id: 'encre', hex: '#0a0a0c' },
+  { id: 'brun', hex: '#8b5e3c' },
+  { id: 'rouge', hex: '#e8483f' },
+  { id: 'orange', hex: '#f08a24' },
+  { id: 'ambre', hex: '#f0b429' },
+  { id: 'vert', hex: '#3ecf8e' },
+  { id: 'turquoise', hex: '#2fbfa0' },
+  { id: 'bleu', hex: '#3b93f0' },
+  { id: 'violet', hex: '#8b5cf6' },
+  { id: 'rose', hex: '#e152b0' },
+  { id: 'gris', hex: '#a3a3a3' },
+  { id: 'creme', hex: '#f1efe9' },
 ];
 
 export const COLOR_BY_ID = new Map<string, BotColor>(COLORS.map((c) => [c.id, c]));
-export const DEFAULT_COLOR = "encre";
+export const DEFAULT_COLOR = 'encre';
 
 /** Melange deux couleurs hex. Sert a la brume de profondeur des particules. */
 export function mixHex(from: string, to: string, t: number): string {
@@ -146,5 +146,5 @@ export function mixHex(from: string, to: string, t: number): string {
   const a = parse(from);
   const b = parse(to);
   const c = a.map((x, i) => Math.round(x + (b[i]! - x) * t));
-  return `#${c.map((x) => x.toString(16).padStart(2, "0")).join("")}`;
+  return `#${c.map((x) => x.toString(16).padStart(2, '0')).join('')}`;
 }

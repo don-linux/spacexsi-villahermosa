@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { EventGallery } from "@/components/events/event-gallery";
-import { LumaTicket } from "@/components/events/luma-ticket";
-import { getPastEvent, pastEvents } from "@/content/events";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
+
+import { getPastEvent, pastEvents } from '@/features/events';
+import { EventGallery } from '@/features/events/event-gallery';
+import { LumaTicket } from '@/features/events/luma-ticket';
 
 export function generateStaticParams() {
   return pastEvents.map((event) => ({ slug: event.slug }));
 }
-
-export const dynamicParams = false;
 
 type EventPageProps = {
   params: Promise<{ slug: string }>;
@@ -18,14 +18,22 @@ type EventPageProps = {
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
   const { slug } = await params;
   const event = getPastEvent(slug);
-  if (!event) return { title: "Eventos pasados · SpaceXAI Villahermosa" };
+  if (!event) return { title: 'Eventos pasados · SpaceXAI Villahermosa' };
   return {
     title: `${event.title} · SpaceXAI Villahermosa`,
     description: event.summary,
   };
 }
 
-export default async function PastEventPage({ params }: EventPageProps) {
+export default function PastEventPage({ params }: EventPageProps) {
+  return (
+    <Suspense fallback={null}>
+      <PastEventContent params={params} />
+    </Suspense>
+  );
+}
+
+async function PastEventContent({ params }: EventPageProps) {
   const { slug } = await params;
   const event = getPastEvent(slug);
   if (!event) notFound();

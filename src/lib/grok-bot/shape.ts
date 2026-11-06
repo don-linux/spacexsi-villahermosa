@@ -1,5 +1,5 @@
-import { TAU, lerp, r2 } from "./math";
-import { PROFILES, PROFILE_SAMPLES, type ProfileName } from "./profiles";
+import { TAU, lerp, r2 } from './math';
+import { PROFILES, PROFILE_SAMPLES, type ProfileName } from './profiles';
 
 export interface Point {
   x: number;
@@ -109,7 +109,7 @@ export function toPoints(s: Silhouette, scale: number, out: Point[] = []): Point
  */
 export function closedPath(pts: Point[], tension = 1 / 6): string {
   const n = pts.length;
-  if (n < 3) return "";
+  if (n < 3) return '';
   const first = pts[0]!;
   let d = `M${r2(first.x)} ${r2(first.y)}`;
   for (let i = 0; i < n; i++) {
@@ -292,11 +292,11 @@ export function regularPolygonProfile(
 
 /** Polyligne fermee exacte : garde les segments droits (contrairement a closedPath). */
 export function polyPath(pts: Point[], scale = 1): string {
-  if (pts.length < 3) return "";
-  let d = "";
+  if (pts.length < 3) return '';
+  let d = '';
   for (let i = 0; i < pts.length; i++) {
     const p = pts[i]!;
-    d += `${i === 0 ? "M" : "L"}${r2(p.x * scale)} ${r2(p.y * scale)}`;
+    d += `${i === 0 ? 'M' : 'L'}${r2(p.x * scale)} ${r2(p.y * scale)}`;
   }
   return `${d}Z`;
 }

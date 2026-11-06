@@ -1,11 +1,11 @@
-import { BotCradle } from "@/components/bot-cradle";
-import { CursorHome } from "@/components/cursor-home";
-import { GrokModel } from "@/components/grok-model";
-import { Hero } from "@/components/hero";
-import { XHome } from "@/components/x-home";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { IntroGate } from "./intro-gate";
+import { SiteFooter } from '@/components/layout/site-footer';
+import { SiteHeader } from '@/components/layout/site-header';
+import { BotCradle } from '@/features/home/bot-cradle';
+import { CursorHome } from '@/features/home/cursor-home';
+import { GrokModel } from '@/features/home/grok-model';
+import { Hero } from '@/features/home/hero';
+import { IntroGate } from '@/features/home/intro-gate';
+import { XHome } from '@/features/home/x-home';
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
-import { encode, QrCodeDataType } from "uqr";
+import { encode, QrCodeDataType } from 'uqr';
 
 /** Quiet zone around the code, in modules; part of the drawing, not a background. */
 const MARGIN = 3;
-const INK = "#111111";
+const INK = '#111111';
 const MODULE_RADIUS = 0.34;
 const RING_RADIUS = 1.15;
 const HOLE_RADIUS = 0.55;
@@ -13,7 +13,7 @@ export function isHttpUrl(value: string | undefined): value is string {
   if (!value) return false;
   try {
     const url = new URL(value.trim());
-    return url.protocol === "http:" || url.protocol === "https:";
+    return url.protocol === 'http:' || url.protocol === 'https:';
   } catch {
     return false;
   }
@@ -21,7 +21,7 @@ export function isHttpUrl(value: string | undefined): value is string {
 
 /** The credits QR as an SVG string, with grok-bot-meetup's rounded modules and finders. */
 export function qrSvg(url: string): string | null {
-  const drawn = drawQr(url, { ecc: "L", margin: MARGIN, sharp: false });
+  const drawn = drawQr(url, { ecc: 'L', margin: MARGIN, sharp: false });
   return drawn?.svg ?? null;
 }
 
@@ -48,7 +48,7 @@ const TEMPLATE_MARGIN = 4;
 /** A template QR with a blank center for the Grok Bot mark. */
 export function templateQrSvg(url: string): TemplateQr | null {
   const drawn = drawQr(url, {
-    ecc: "H",
+    ecc: 'H',
     margin: TEMPLATE_MARGIN,
     sharp: true,
     clearCenter: true,
@@ -59,7 +59,7 @@ export function templateQrSvg(url: string): TemplateQr | null {
 
 function drawQr(
   url: string,
-  options: { ecc: "L" | "H"; margin: number; sharp: boolean; clearCenter?: boolean },
+  options: { ecc: 'L' | 'H'; margin: number; sharp: boolean; clearCenter?: boolean },
 ): { svg: string; markSize: number } | null {
   const href = url.trim();
   if (!isHttpUrl(href)) return null;
@@ -86,7 +86,7 @@ function drawQr(
     pieces.push(`<circle cx="${center}" cy="${center}" r="${clearRadius}" fill="#ffffff"/>`);
   }
   return {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${view} ${view}" fill="${INK}" aria-hidden="true">${pieces.join("")}</svg>`,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${view} ${view}" fill="${INK}" aria-hidden="true">${pieces.join('')}</svg>`,
     markSize: clearRadius > 0 ? (clearRadius * 2) / view : 0,
   };
 }

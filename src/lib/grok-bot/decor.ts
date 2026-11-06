@@ -1,4 +1,4 @@
-import { TAU, clamp, createRng, r2 } from "./math";
+import { TAU, clamp, createRng, r2 } from './math';
 
 /* ------------------------------------------------------------------ couleurs */
 
@@ -27,7 +27,7 @@ function wheel(hue: number, s = 0.55, l = 0.62): string {
   const hex = (v: number) =>
     Math.round((v + m) * 255)
       .toString(16)
-      .padStart(2, "0");
+      .padStart(2, '0');
   return `#${hex(r)}${hex(g)}${hex(b)}`;
 }
 
@@ -123,8 +123,8 @@ export function arcRender(
 
   const N = 64;
   const span = seed.sweep * TAU;
-  let front = "";
-  let back = "";
+  let front = '';
+  let back = '';
   let prev: boolean | null = null;
 
   for (let i = 0; i <= N; i++) {
@@ -139,7 +139,7 @@ export function arcRender(
     const behind = z < 0;
     const sx = r2(x * scale);
     const sy = r2(y * scale);
-    const cmd = behind !== prev ? "M" : "L";
+    const cmd = behind !== prev ? 'M' : 'L';
     if (behind) back += `${cmd}${sx} ${sy}`;
     else front += `${cmd}${sx} ${sy}`;
     prev = behind;
@@ -281,7 +281,7 @@ export const COMET_DOT = 0.129;
 /* --------------------------------------------------- pastille notification */
 
 /** Bleu releve au pixel. */
-export const NOTIF_BLUE = "#2496e8";
+export const NOTIF_BLUE = '#2496e8';
 /** La pastille est posee exactement sur la circonference, a -42deg. */
 export const NOTIF_ANGLE = -42;
 export const NOTIF_DIST = 1.003;

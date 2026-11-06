@@ -43,3 +43,6 @@ next-env.d.ts
 
 # local branding assets (only the files in public/brand are tracked)
 /branding-assets/
+
+.cursor/
+.vitest/
