@@ -1,6 +1,7 @@
 import type { SVGProps } from 'react';
 
 import { GrokBotWordmark } from '@/components/ui/grok-bot-wordmark';
+import { Pill } from '@/components/ui/pill';
 
 type AccountLogoKind = 'donlinux' | 'grok-bot' | 'cursor' | 'grok' | 'x';
 
@@ -54,7 +55,7 @@ export function XHome() {
               <span className="x-home-logo">
                 <AccountLogo kind={account.logo} />
               </span>
-              <span className="pill pill-solid">@{account.handle}</span>
+              <Pill tone="solid">@{account.handle}</Pill>
             </a>
           </li>
         ))}

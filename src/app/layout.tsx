@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import { CursorPlaylist } from '@/components/layout/cursor-playlist';
 import { Providers } from '@/components/providers';
+import { cn } from '@/lib/utils';
 
 import './globals.css';
 
@@ -30,8 +31,8 @@ const universalDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'SpaceXAI Villahermosa',
-  description: 'SpaceXAI Villahermosa',
+  title: 'SpaceXSI Villahermosa',
+  description: 'SpaceXSI Villahermosa',
 };
 
 export const viewport: Viewport = {
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="es"
-      className={`${universalSans.variable} ${universalDisplay.variable} dark h-full antialiased`}
+      className={cn(universalSans.variable, universalDisplay.variable, 'dark h-full antialiased')}
       style={{ colorScheme: 'dark' }}
       suppressHydrationWarning
     >

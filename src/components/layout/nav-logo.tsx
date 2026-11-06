@@ -15,7 +15,8 @@ import {
   RIVE_STATE_MACHINE,
   usePrefersReducedMotion,
   useRiveSettled,
-} from '@/lib/spacexai-rive';
+} from '@/lib/spacexsi-rive';
+import { cn } from '@/lib/utils';
 
 /** Rendered height of the X mark in the navbar, in px. */
 const MARK_HEIGHT = 20;
@@ -67,20 +68,20 @@ export function NavLogo() {
     <Link
       href="/"
       className="flex items-center gap-3 rounded-md outline-offset-4"
-      aria-label="SpaceXAI Villahermosa, inicio"
+      aria-label="SpaceXSI Villahermosa, inicio"
     >
       <span className="relative block shrink-0" style={{ width: MARK_WIDTH, height: MARK_HEIGHT }}>
         {effectiveMode === 'static' ? (
           <>
             <img
-              src="/brand/spacexai/mark-white.svg"
+              src="/brand/spacexsi/mark-white.svg"
               alt=""
               width={MARK_WIDTH}
               height={MARK_HEIGHT}
               className="theme-dark-only block h-full w-full"
             />
             <img
-              src="/brand/spacexai/spacexai-symbol-black-transparent.svg"
+              src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
               alt=""
               width={MARK_WIDTH}
               height={MARK_HEIGHT}
@@ -92,7 +93,7 @@ export function NavLogo() {
         ) : null}
       </span>
       <span
-        className={`nav-logo-label flex items-center gap-3${showLabel ? ' nav-logo-label-in' : ''}`}
+        className={cn('nav-logo-label flex items-center gap-3', showLabel && 'nav-logo-label-in')}
         aria-hidden
       >
         <span className="h-4 w-px bg-foreground/25" />

@@ -5,8 +5,8 @@ import type { PastEventCardData } from '@/features/events/event-card';
 import { PastEventsBrowser } from '@/features/events/past-events-browser';
 
 export const metadata: Metadata = {
-  title: 'Eventos pasados · SpaceXAI Villahermosa',
-  description: 'Fotos y programa de los meetups de SpaceXAI en Villahermosa.',
+  title: 'Eventos pasados · SpaceXSI Villahermosa',
+  description: 'Fotos y programa de los meetups de SpaceXSI en Villahermosa.',
 };
 
 const cards: PastEventCardData[] = pastEvents.map((event) => ({

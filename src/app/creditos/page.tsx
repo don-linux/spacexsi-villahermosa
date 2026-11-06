@@ -4,7 +4,7 @@ import { CreditsWall } from '@/features/credits/credits-wall';
 import { isHttpUrl, qrSvg } from '@/lib/claim-qr';
 
 export const metadata: Metadata = {
-  title: 'Créditos · SpaceXAI Villahermosa',
+  title: 'Créditos · SpaceXSI Villahermosa',
   description: 'Canjea los créditos del meetup de Grok en Villahermosa.',
 };
 

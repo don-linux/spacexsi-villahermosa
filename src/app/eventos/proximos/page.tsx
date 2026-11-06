@@ -5,8 +5,8 @@ import { EventCard, type PastEventCardData } from '@/features/events/event-card'
 import { upcomingMeetup } from '@/features/events/upcoming';
 
 export const metadata: Metadata = {
-  title: 'Proximos meetups · SpaceXAI Villahermosa',
-  description: 'El siguiente meetup de SpaceXAI en Villahermosa.',
+  title: 'Proximos meetups · SpaceXSI Villahermosa',
+  description: 'El siguiente meetup de SpaceXSI en Villahermosa.',
 };
 
 const EMPTY_COPY =

@@ -4,7 +4,7 @@ import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 
 export const metadata: Metadata = {
-  title: 'Código de conducta · SpaceXAI Villahermosa',
+  title: 'Código de conducta · SpaceXSI Villahermosa',
 };
 
 const POSITIVE_BEHAVIORS = [
@@ -57,7 +57,7 @@ export default function CodigoDeConductaPage() {
           <BrandLockup />
 
           <h1 className="mt-10 text-center text-3xl font-semibold tracking-tight text-balance text-foreground md:text-4xl">
-            Código de conducta de la comunidad SpaceXAI
+            Código de conducta de la comunidad SpaceXSI
           </h1>
 
           <section className="mt-14">
@@ -210,29 +210,29 @@ function BrandLockup() {
   return (
     <div className="mx-auto flex max-w-full items-center justify-center gap-3 sm:gap-4">
       <img
-        src="/brand/spacexai/spacexai-symbol-white-transparent.svg"
+        src="/brand/spacexsi/spacexsi-symbol-white-transparent.svg"
         alt=""
         width={834}
         height={318}
         className="theme-dark-only h-7 w-auto sm:h-9"
       />
       <img
-        src="/brand/spacexai/spacexai-symbol-black-transparent.svg"
+        src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
         alt=""
         width={834}
         height={318}
         className="theme-light-only h-7 w-auto sm:h-9"
       />
       <img
-        src="/brand/spacexai/spacexai-wordmark-white-transparent.svg"
-        alt="SpaceXAI"
+        src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
+        alt="SpaceXSI"
         width={1294}
         height={158}
         className="theme-dark-only h-7 w-auto sm:h-9"
       />
       <img
-        src="/brand/spacexai/spacexai-wordmark-black-transparent.svg"
-        alt="SpaceXAI"
+        src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
+        alt="SpaceXSI"
         width={1294}
         height={158}
         className="theme-light-only h-7 w-auto sm:h-9"

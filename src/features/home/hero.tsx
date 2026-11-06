@@ -2,8 +2,9 @@ import Link from 'next/link';
 import type { CSSProperties } from 'react';
 
 import { ArrowUpRightIcon } from '@/components/ui/icons';
+import { Pill } from '@/components/ui/pill';
 
-import { SpaceXAIWordmark } from './spacexai-wordmark';
+import { SpaceXSIWordmark } from './spacexsi-wordmark';
 
 /** Swap for the Cursor Meetup URL when it exists. */
 const CURSOR_MEETUP_HREF = '#';
@@ -34,7 +35,7 @@ export function Hero() {
         className="reveal hero-title mt-8 max-w-5xl font-normal tracking-[-0.035em] text-balance text-foreground"
         style={revealDelay(220)}
       >
-        La comunidad de <SpaceXAIWordmark className="hero-wordmark" data-intro-target /> en
+        La comunidad de <SpaceXSIWordmark className="hero-wordmark" data-intro-target /> en
         Villahermosa{' '}
         <span className="block">
           está <span className="hero-underline">aquí</span>.
@@ -45,14 +46,14 @@ export function Hero() {
         className="reveal mt-6 max-w-xl text-base text-pretty text-foreground/60 md:text-lg"
         style={revealDelay(320)}
       >
-        Conoce las herramientas de SpaceXAI para construir con Grok en nuestros meetups y eventos en
+        Conoce las herramientas de SpaceXSI para construir con Grok en nuestros meetups y eventos en
         Tabasco.
       </p>
 
       <div className="reveal mt-9 flex justify-center" style={revealDelay(420)}>
-        <Link href="/eventos/pasados" className="pill pill-soft h-11 px-5">
+        <Pill as={Link} href="/eventos/pasados" tone="soft" className="h-11 px-5">
           Ver eventos pasados
-        </Link>
+        </Pill>
       </div>
     </section>
   );

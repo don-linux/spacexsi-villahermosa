@@ -4,6 +4,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 import type { ComponentType, PointerEvent, ReactNode, SVGProps } from 'react';
 
 import { ChevronDownIcon, InstagramIcon, XIcon } from '@/components/ui/icons';
+import { Pill } from '@/components/ui/pill';
+import { cn } from '@/lib/utils';
 
 import { NavLogo } from './nav-logo';
 
@@ -44,13 +46,13 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Recursos',
     items: [
       {
-        label: 'API de SpaceXAI',
+        label: 'API de SpaceXSI',
         description: 'Modelos, precios y llaves',
         href: 'https://x.ai/api',
         external: true,
       },
       {
-        label: 'Documentacion de SpaceXAI',
+        label: 'Documentacion de SpaceXSI',
         description: 'Referencia oficial',
         href: 'https://docs.x.ai/overview',
         external: true,
@@ -86,12 +88,12 @@ const CONTACT_LINKS: NavLink[] = [
 const JOIN_LINKS: NavLink[] = [
   {
     label: 'Comunidad global',
-    href: 'https://luma.com/spacexai-community',
+    href: 'https://luma.com/spacexsi-community',
     external: true,
   },
   {
     label: 'Villahermosa',
-    href: 'https://luma.com/spacexai-villahermosa',
+    href: 'https://luma.com/spacexsi-villahermosa',
     external: true,
   },
 ];
@@ -172,7 +174,7 @@ export function SiteHeader() {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${surface}`}
+      className={cn('sticky top-0 z-50 border-b transition-colors duration-300', surface)}
     >
       <div className="reveal mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-5 md:px-6">
         <div className="flex items-center gap-8">
@@ -234,15 +236,17 @@ export function SiteHeader() {
               onNavigate={() => setOpenMenu(null)}
             />
           </div>
-          <button
+          <Pill
+            as="button"
             type="button"
-            className="pill pill-solid md:hidden"
+            tone="solid"
+            className="md:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             onClick={() => setMobileOpen(true)}
           >
             Únete
-          </button>
+          </Pill>
           <MobileMenuButton isOpen={mobileOpen} onToggle={() => setMobileOpen((open) => !open)} />
         </div>
       </div>
@@ -278,7 +282,7 @@ function NavDropdown({
       >
         {label}
         <ChevronDownIcon
-          className={`size-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={cn('size-3.5 transition-transform duration-200', isOpen && 'rotate-180')}
         />
       </button>
       {isOpen ? (
@@ -303,15 +307,16 @@ function ContactButton({
 
   return (
     <>
-      <button
+      <Pill
+        as="button"
         type="button"
-        className="pill pill-soft"
+        tone="soft"
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={onToggle}
       >
         Contacto
-      </button>
+      </Pill>
       {isOpen ? (
         <div id={panelId} className="dropdown right-0">
           <DropdownLinks links={CONTACT_LINKS} onNavigate={onNavigate} />
@@ -354,7 +359,7 @@ function JoinButton({
           onClick={onToggle}
         >
           <ChevronDownIcon
-            className={`size-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            className={cn('size-4 transition-transform duration-200', isOpen && 'rotate-180')}
           />
         </button>
       </div>
@@ -412,9 +417,10 @@ function DropdownLinks({
           <MenuAnchor
             link={link}
             onNavigate={onNavigate}
-            className={`rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/[0.06] ${
-              link.icon ? 'flex items-start gap-3' : 'block'
-            }`}
+            className={cn(
+              'rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/[0.06]',
+              link.icon ? 'flex items-start gap-3' : 'block',
+            )}
           />
         </li>
       ))}
@@ -471,14 +477,16 @@ function MobileMenuButton({ isOpen, onToggle }: { isOpen: boolean; onToggle: () 
       onClick={onToggle}
     >
       <span
-        className={`absolute h-px w-4 bg-current transition-transform duration-200 ${
-          isOpen ? 'rotate-45' : '-translate-y-1'
-        }`}
+        className={cn(
+          'absolute h-px w-4 bg-current transition-transform duration-200',
+          isOpen ? 'rotate-45' : '-translate-y-1',
+        )}
       />
       <span
-        className={`absolute h-px w-4 bg-current transition-transform duration-200 ${
-          isOpen ? '-rotate-45' : 'translate-y-1'
-        }`}
+        className={cn(
+          'absolute h-px w-4 bg-current transition-transform duration-200',
+          isOpen ? '-rotate-45' : 'translate-y-1',
+        )}
       />
     </button>
   );
@@ -505,9 +513,10 @@ function MobileLinkGroup({
             <MenuAnchor
               link={link}
               onNavigate={onNavigate}
-              className={`rounded-lg px-1 py-2.5 hover:bg-foreground/[0.06] ${
-                link.icon ? 'flex items-start gap-3' : 'block'
-              }`}
+              className={cn(
+                'rounded-lg px-1 py-2.5 hover:bg-foreground/[0.06]',
+                link.icon ? 'flex items-start gap-3' : 'block',
+              )}
             />
           </li>
         ))}

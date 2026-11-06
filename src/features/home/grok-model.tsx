@@ -27,7 +27,7 @@ export function GrokModel() {
           </span>
         </h2>
         <p className="mt-3 text-base text-pretty text-foreground/60 md:text-lg">
-          Contexto largo y herramientas, directamente desde los laboratorios de SpaceXAI hasta
+          Contexto largo y herramientas, directamente desde los laboratorios de SpaceXSI hasta
           Villahermosa.
         </p>
       </header>

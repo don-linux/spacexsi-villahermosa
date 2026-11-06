@@ -11,6 +11,7 @@ import { HomeIcon } from '@/components/ui/icons';
 import { EXPRESSIONS, type ExpressionId } from '@/lib/grok-bot/expressions';
 import { COLORS, SHAPES, type ColorId, type ShapeId } from '@/lib/grok-bot/skins';
 import type { StateId } from '@/lib/grok-bot/states';
+import { cn } from '@/lib/utils';
 
 import styles from './credits-wall.module.css';
 
@@ -150,14 +151,14 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
   }, []);
 
   return (
-    <div className={`${styles.wall} ${claim ? styles.claimMode : ''}`}>
+    <div className={cn(styles.wall, claim && styles.claimMode)}>
       <h1 className="sr-only">Grok Bot · Créditos del meetup {CITY}</h1>
 
       {/* Always mounted: a transition doesn't play on first style, and unmounting would cut the fade. */}
       <button
         ref={backRef}
         type="button"
-        className={`${styles.textLink} ${styles.back}`}
+        className={cn(styles.textLink, styles.back)}
         inert={!claim}
         onClick={closeClaim}
       >
@@ -179,14 +180,14 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
               alt=""
               width={724}
               height={264}
-              className={`theme-dark-only ${styles.luma}`}
+              className={cn('theme-dark-only', styles.luma)}
             />
             <img
               src="/brand/luma/luma-logo-black.svg"
               alt=""
               width={724}
               height={264}
-              className={`theme-light-only ${styles.luma}`}
+              className={cn('theme-light-only', styles.luma)}
             />
           </a>
         ) : null}
@@ -209,7 +210,7 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
               <button
                 ref={claimRef}
                 type="button"
-                className={`${styles.textLink} ${styles.claim}`}
+                className={cn(styles.textLink, styles.claim)}
                 aria-expanded={claim}
                 inert={claim}
                 onClick={openClaim}
@@ -253,18 +254,18 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
       <footer className={styles.presented}>
         <p className={styles.presentedLabel}>Presentado por</p>
         <img
-          src="/brand/spacexai/spacexai-wordmark-white-transparent.svg"
-          alt="SpaceXAI"
+          src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
+          alt="SpaceXSI"
           width={1294}
           height={158}
-          className={`theme-dark-only ${styles.spacexai}`}
+          className={cn('theme-dark-only', styles.spacexsi)}
         />
         <img
-          src="/brand/spacexai/spacexai-wordmark-black-transparent.svg"
-          alt="SpaceXAI"
+          src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
+          alt="SpaceXSI"
           width={1294}
           height={158}
-          className={`theme-light-only ${styles.spacexai}`}
+          className={cn('theme-light-only', styles.spacexsi)}
         />
       </footer>
 

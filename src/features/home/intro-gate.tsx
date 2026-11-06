@@ -3,9 +3,9 @@
 import { createContext, use, useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 
-import { usePrefersReducedMotion } from '@/lib/spacexai-rive';
+import { usePrefersReducedMotion } from '@/lib/spacexsi-rive';
 
-import { SpaceXAIIntro } from './spacexai-intro';
+import { SpaceXSIIntro } from './spacexsi-intro';
 
 type Stage = 'intro' | 'revealing' | 'done';
 
@@ -33,7 +33,7 @@ export function IntroGate({ children }: { children: ReactNode }) {
       <div className="flex min-h-dvh flex-1 flex-col" data-intro={dataIntro}>
         {children}
       </div>
-      {showIntro ? <SpaceXAIIntro onReveal={reveal} onDone={finish} /> : null}
+      {showIntro ? <SpaceXSIIntro onReveal={reveal} onDone={finish} /> : null}
     </RevealedContext>
   );
 }

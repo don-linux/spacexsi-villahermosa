@@ -14,7 +14,7 @@ const FOOTER_COLUMNS: FooterGroup[][] = [
   [
     {
       title: 'Recursos',
-      links: ['API de SpaceXAI', 'Documentacion de SpaceXAI', 'Novedades de xAI'],
+      links: ['API de SpaceXSI', 'Documentacion de SpaceXSI', 'Novedades de xAI'],
     },
     { title: 'Herramientas', links: ['Herramientas de la comunidad'] },
   ],
@@ -30,8 +30,8 @@ const FOOTER_HREFS: Record<string, string> = {
   Créditos: '/creditos',
   'Próximos meetups': '/eventos/proximos',
   'Eventos pasados': '/eventos/pasados',
-  'API de SpaceXAI': 'https://x.ai/api',
-  'Documentacion de SpaceXAI': 'https://docs.x.ai/overview',
+  'API de SpaceXSI': 'https://x.ai/api',
+  'Documentacion de SpaceXSI': 'https://docs.x.ai/overview',
   'Novedades de xAI': 'https://x.ai/news',
   'Herramientas de la comunidad': '/herramientas',
 };
@@ -43,21 +43,21 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4">
           <Link href="/" className="block w-fit rounded-sm outline-offset-4">
             <img
-              src="/brand/spacexai/spacexai-wordmark-white-transparent.svg"
-              alt="SpaceXAI"
+              src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
+              alt="SpaceXSI"
               width={1294}
               height={158}
               className="theme-dark-only h-4 w-auto"
             />
             <img
-              src="/brand/spacexai/spacexai-wordmark-black-transparent.svg"
-              alt="SpaceXAI"
+              src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
+              alt="SpaceXSI"
               width={1294}
               height={158}
               className="theme-light-only h-4 w-auto"
             />
           </Link>
-          <p className="text-[13px] text-foreground/50">© 2026 SpaceXAI Villahermosa</p>
+          <p className="text-[13px] text-foreground/50">© 2026 SpaceXSI Villahermosa</p>
         </div>
 
         <nav

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { FilterChip } from '@/components/ui/filter-chip';
+
 import { EventCard, type PastEventCardData } from './event-card';
 
 type View = 'grid' | 'list';
@@ -22,12 +24,12 @@ export function PastEventsBrowser({ events }: { events: PastEventCardData[] }) {
           aria-label="Vista del listado"
           className="inline-flex w-fit rounded-full bg-foreground/[0.06] p-1"
         >
-          <ViewButton pressed={view === 'grid'} onSelect={() => setView('grid')}>
+          <FilterChip pressed={view === 'grid'} onSelect={() => setView('grid')}>
             Rejilla
-          </ViewButton>
-          <ViewButton pressed={view === 'list'} onSelect={() => setView('list')}>
+          </FilterChip>
+          <FilterChip pressed={view === 'list'} onSelect={() => setView('list')}>
             Listado
-          </ViewButton>
+          </FilterChip>
         </div>
       </div>
 
@@ -55,28 +57,5 @@ export function PastEventsBrowser({ events }: { events: PastEventCardData[] }) {
         </ul>
       )}
     </section>
-  );
-}
-
-function ViewButton({
-  pressed,
-  onSelect,
-  children,
-}: {
-  pressed: boolean;
-  onSelect: () => void;
-  children: string;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed={pressed}
-      onClick={onSelect}
-      className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
-        pressed ? 'bg-foreground text-background' : 'text-foreground/65 hover:text-foreground'
-      }`}
-    >
-      {children}
-    </button>
   );
 }

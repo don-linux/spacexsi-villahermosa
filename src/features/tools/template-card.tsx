@@ -4,8 +4,10 @@ import { useState, useSyncExternalStore, type KeyboardEvent, type MouseEvent } f
 
 import { useResolvedTheme, type ResolvedTheme } from '@/components/providers';
 import { GrokBot } from '@/components/ui/grok-bot';
+import { Pill } from '@/components/ui/pill';
 import type { CommunityTemplate } from '@/features/tools/templates';
 import { templateQrSvg } from '@/lib/claim-qr';
+import { cn } from '@/lib/utils';
 
 const PAPER: Record<ResolvedTheme, string> = { dark: '#0a0a0a', light: '#ffffff' };
 const subscribeNothing = () => () => {};
@@ -99,9 +101,10 @@ function FlipCard({
     >
       <div className="template-flip-inner" data-turned={flipped ? 'true' : 'false'}>
         <div
-          className={`template-flip-face template-flip-front flex h-full flex-col rounded-3xl border border-foreground/[0.08] p-5 md:p-6 ${
-            flipped ? 'pointer-events-none' : ''
-          }`}
+          className={cn(
+            'template-flip-face template-flip-front flex h-full flex-col rounded-3xl border border-foreground/[0.08] p-5 md:p-6',
+            flipped && 'pointer-events-none',
+          )}
           inert={flipped}
           aria-hidden={flipped}
         >
@@ -129,9 +132,10 @@ function FlipCard({
         </div>
 
         <div
-          className={`template-flip-face template-flip-back flex h-full flex-col items-center justify-center rounded-3xl border border-foreground/[0.08] bg-white px-6 py-5 text-[#111111] ${
-            flipped ? '' : 'pointer-events-none'
-          }`}
+          className={cn(
+            'template-flip-face template-flip-back flex h-full flex-col items-center justify-center rounded-3xl border border-foreground/[0.08] bg-white px-6 py-5 text-[#111111]',
+            !flipped && 'pointer-events-none',
+          )}
           inert={!flipped}
           aria-hidden={!flipped}
         >
@@ -198,15 +202,17 @@ function BotFace({
 
 function AddLink({ href }: { href: string }) {
   return (
-    <a
+    <Pill
+      as="a"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="pill pill-solid w-fit shrink-0"
+      tone="solid"
+      className="w-fit shrink-0"
       onClick={stopCardFlip}
     >
       Agregar a Grok Bot
-    </a>
+    </Pill>
   );
 }
 

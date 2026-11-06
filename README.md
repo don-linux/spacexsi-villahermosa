@@ -1,6 +1,6 @@
-# SpaceXAI Villahermosa
+# SpaceXSI Villahermosa
 
-Sitio en Next.js para SpaceXAI Villahermosa, desplegado en Vercel.
+Sitio en Next.js para SpaceXSI Villahermosa, desplegado en Vercel.
 
 ## Desarrollo
 

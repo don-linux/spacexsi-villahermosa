@@ -24,9 +24,9 @@ type EventPageProps = {
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
   const { slug } = await params;
   const event = getUpcomingMeetup(slug);
-  if (!event) return { title: 'Proximos meetups · SpaceXAI Villahermosa' };
+  if (!event) return { title: 'Proximos meetups · SpaceXSI Villahermosa' };
   return {
-    title: `${event.title} · SpaceXAI Villahermosa`,
+    title: `${event.title} · SpaceXSI Villahermosa`,
     description: event.summary,
   };
 }

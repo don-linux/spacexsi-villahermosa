@@ -6,7 +6,7 @@ import { templatesForSection } from '@/features/tools/templates';
 import { ToolSectionsBrowser } from '@/features/tools/tool-sections-browser';
 
 export const metadata: Metadata = {
-  title: 'Herramientas de la comunidad · SpaceXAI Villahermosa',
+  title: 'Herramientas de la comunidad · SpaceXSI Villahermosa',
   description: 'Herramientas creadas por la comunidad para la comunidad.',
 };
 

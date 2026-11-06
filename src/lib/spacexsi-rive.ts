@@ -4,7 +4,7 @@ import { EventType } from '@rive-app/react-canvas';
 import type { Event as RiveEvent, Rive } from '@rive-app/react-canvas';
 import { useEffect, useSyncExternalStore } from 'react';
 
-export const RIVE_SRC = '/brand/spacexai/spacexai-dark.riv';
+export const RIVE_SRC = '/brand/spacexsi/spacexsi-dark.riv';
 export const RIVE_ARTBOARD = 'SPACE X WEB';
 export const RIVE_STATE_MACHINE = 'SPACE X WEB';
 

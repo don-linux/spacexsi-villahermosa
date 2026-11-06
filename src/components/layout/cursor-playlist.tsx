@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { cn } from '@/lib/utils';
+
 const PLAYLIST_URL = 'https://open.spotify.com/playlist/1H7LmDUU8sSoSsy8amnBNY';
 const FRAME_ID = 'cursor-playlist-frame';
 const EMBED_ALLOW = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
@@ -153,7 +155,7 @@ export function CursorPlaylist() {
 
   return (
     <div
-      className={`cursor-playlist${playing ? ' is-playing' : ''}`}
+      className={cn('cursor-playlist', playing && 'is-playing')}
       onPointerEnter={arm}
       onFocus={arm}
     >

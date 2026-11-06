@@ -1,17 +1,17 @@
 import type { SVGProps } from 'react';
 
 /**
- * Paths are copied verbatim from `public/brand/spacexai/wordmark-white.svg`; the brand
+ * Paths are copied verbatim from `public/brand/spacexsi/wordmark-white.svg`; the brand
  * guidelines forbid altering the logo, so only the fill is swapped for `currentColor`.
  */
-export function SpaceXAIWordmark(props: SVGProps<SVGSVGElement>) {
+export function SpaceXSIWordmark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 1294 158"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="SpaceXAI"
+      aria-label="SpaceXSI"
       {...props}
     >
       <path

@@ -4,7 +4,8 @@ import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
-import { RIVE_ARTBOARD, RIVE_SRC, RIVE_STATE_MACHINE, useRiveSettled } from '@/lib/spacexai-rive';
+import { RIVE_ARTBOARD, RIVE_SRC, RIVE_STATE_MACHINE, useRiveSettled } from '@/lib/spacexsi-rive';
+import { cn } from '@/lib/utils';
 
 /** A short beat of dark before the Rive logo starts, so the write-on is not lost to the page load. */
 const RIVE_HOLD_MS = 350;
@@ -17,14 +18,14 @@ const CROSSFADE_MS = 700;
 /** How long the static wordmark stays on screen before the landing is revealed. */
 const WORDMARK_HOLD_MS = 650;
 /**
- * Long enough for the `.spacexai-stage` glide and for the hero headline underneath to finish
+ * Long enough for the `.spacexsi-stage` glide and for the hero headline underneath to finish
  * its reveal, so unmounting the overlay is invisible.
  */
 const EXIT_MS = 1200;
 
 type Phase = 'intro' | 'leaving' | 'wordmark' | 'exiting';
 
-export function SpaceXAIIntro({ onReveal, onDone }: { onReveal: () => void; onDone: () => void }) {
+export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDone: () => void }) {
   const [phase, setPhase] = useState<Phase>('intro');
   const [isArmed, setIsArmed] = useState(false);
   const [morph, setMorph] = useState<CSSProperties | null>(null);
@@ -73,24 +74,24 @@ export function SpaceXAIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
   const isExiting = phase === 'exiting';
 
   return (
-    <div className={`intro-screen${isExiting ? ' intro-screen-exit' : ''}`} aria-hidden>
+    <div className={cn('intro-screen', isExiting && 'intro-screen-exit')} aria-hidden>
       <div
         ref={stageRef}
-        className={`spacexai-stage${isExiting && !morph ? ' spacexai-stage-fade' : ''}`}
+        className={cn('spacexsi-stage', isExiting && !morph && 'spacexsi-stage-fade')}
         style={morph ?? undefined}
       >
         {showWordmark ? (
           <>
             <img
-              className="spacexai-wordmark theme-dark-only"
-              src="/brand/spacexai/spacexai-wordmark-white-transparent.svg"
+              className="spacexsi-wordmark theme-dark-only"
+              src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
               alt=""
               width={1294}
               height={158}
             />
             <img
-              className="spacexai-wordmark theme-light-only"
-              src="/brand/spacexai/spacexai-wordmark-black-transparent.svg"
+              className="spacexsi-wordmark theme-light-only"
+              src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
               alt=""
               width={1294}
               height={158}
@@ -143,5 +144,5 @@ function IntroRive({ isLeaving, onDone }: { isLeaving: boolean; onDone: () => vo
 
   useRiveSettled(rive, settle);
 
-  return <RiveComponent className={`intro-rive${isLeaving ? ' intro-rive-leaving' : ''}`} />;
+  return <RiveComponent className={cn('intro-rive', isLeaving && 'intro-rive-leaving')} />;
 }

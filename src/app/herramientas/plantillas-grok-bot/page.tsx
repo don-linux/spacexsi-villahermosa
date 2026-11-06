@@ -8,7 +8,7 @@ import { templatesForSection } from '@/features/tools/templates';
 const section = getToolSection('plantillas-grok-bot');
 
 export const metadata: Metadata = {
-  title: 'Plantillas de Grok Bot · SpaceXAI Villahermosa',
+  title: 'Plantillas de Grok Bot · SpaceXSI Villahermosa',
   description: section?.description ?? 'Plantillas de Grok Bot de la comunidad.',
 };
 
