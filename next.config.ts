@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       '*.css': {
+        // CSS modules must stay on Next's own pipeline. This loader emits plain CSS and drops the
+        // class map, which is what left /creditos unstyled.
+        condition: { not: { path: /\.module\.css$/ } },
         loaders: ['@tailwindcss/turbopack'],
         as: '*.css',
       },
