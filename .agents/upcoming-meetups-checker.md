@@ -23,7 +23,7 @@ No escribas archivos del evento hasta tener todo lo de abajo. Si falta algo, det
 
 ## Cuando ya esta todo
 
-1. Copia los archivos a una carpeta nueva bajo `src/features/events/`, sin mover ni borrar los originales que te pasaron.
+1. Copia los archivos a una carpeta nueva bajo `src/features/events/`, sin mover, borrar ni recomprimir los originales. Entran tal cual. En la pieza, `quality` queda en 90, como dice la sección Imágenes de `AGENTS.md`.
 2. Importa cada imagen con una ruta literal.
 3. Agrega el objeto `UpcomingMeetup` a `upcomingEvents`. `lumaUrl` es obligatorio. Este tipo no lleva `photos`.
 4. Con un solo proximo, `/eventos/proximos` es una tarjeta grande, sin selector de vista. Con varios, una rejilla. La pagina del evento muestra el ticket de Luma y el programa, no la galeria.

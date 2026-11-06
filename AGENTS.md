@@ -16,6 +16,14 @@ Por esa limitación, el texto en español no se dibuja completo en esta tipograf
 
 Al agregar texto, hay que tenerlo en cuenta: cualquier carácter fuera de ese juego no se verá en Universal Sans.
 
+## Imágenes
+
+El archivo que entra al repo es el original, en la calidad en que llegó. No lo conviertas a JPG ni lo recomprimas antes de subirlo.
+
+`next/image` optimiza una sola vez, al servir. Flyers, portadas y cualquier pieza con texto, código QR o fotografía usan `quality={90}`. El 75 de Next se queda para el resto.
+
+En Next 16, `images.qualities` de `next.config.ts` tiene que incluir ese 90. Si no está en la lista, Next lo acerca a 75. No uses `unoptimized` para saltarte esa compresión.
+
 ## Next.js preferences
 
 ### Build UI once
