@@ -15,7 +15,7 @@ export const cursorMeetupVillahermosa = {
   cover: {
     src: coverLuma,
     alt: 'Poster de Cursor Villahermosa Meetup sobre el puente peatonal',
-    unoptimized: true,
+    quality: 90,
   },
   flyers: [
     {
@@ -24,7 +24,7 @@ export const cursorMeetupVillahermosa = {
       title: 'El arte de hablar con la IA para obtener resultados increíbles (sin saber programar)',
       subtitle: 'Para desarrolladores y no desarrolladores',
       speaker: 'Victor Leon, Lead AI and Product Engineer en Weelock',
-      unoptimized: true,
+      quality: 90,
     },
     {
       src: flyerRaul,
@@ -32,7 +32,7 @@ export const cursorMeetupVillahermosa = {
       title: 'De autodidacta a emprendedor SaaS',
       subtitle: 'Una historia para desarrolladores y no desarrolladores',
       speaker: 'Raúl Gallegos Hernández, CEO & Founder en Plick',
-      unoptimized: true,
+      quality: 90,
     },
   ],
 } satisfies UpcomingMeetup;

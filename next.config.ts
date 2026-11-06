@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  images: {
+    // 75 is Next's default. 90 is for source artwork that should stay sharp.
+    qualities: [75, 90],
+  },
   // Bottom-right is the playlist control. Bottom-left is the theme toggle on /creditos.
   devIndicators: { position: 'top-left' },
   turbopack: {

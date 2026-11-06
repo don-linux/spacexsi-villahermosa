@@ -62,7 +62,7 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                     src={flyer.src}
                     alt={flyer.alt}
                     sizes="(min-width: 640px) 50vw, 100vw"
-                    unoptimized={flyer.unoptimized}
+                    quality={flyer.quality}
                     className="h-auto w-full"
                     style={{ width: '100%', height: 'auto' }}
                   />
@@ -136,7 +136,7 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                 alt={frame.alt}
                 fill
                 sizes="100vw"
-                unoptimized={frame.unoptimized}
+                quality={frame.quality}
                 className="object-contain"
               />
             </div>
