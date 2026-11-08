@@ -1,22 +1,19 @@
 import type { Metadata } from 'next';
 
+import { lumaEventUrl } from '@/features/credits/claim-links';
+import { CreditsLauncher } from '@/features/credits/credits-launcher';
 import { CreditsWall } from '@/features/credits/credits-wall';
-import { isHttpUrl, qrSvg } from '@/lib/claim-qr';
 
 export const metadata: Metadata = {
   title: 'Créditos · SpaceXSI Villahermosa',
   description: 'Canjea los créditos del meetup de Grok en Villahermosa.',
 };
 
-// Read at build time, like any env var of a static page: changing one needs a redeploy.
+// The page behind the menu is the first view of both flows.
 export default function CreditsPage() {
-  const claimUrl = process.env.CREDITS_CLAIM_URL;
-  const lumaUrl = process.env.LUMA_EVENT_URL;
-
   return (
-    <CreditsWall
-      qrSvg={isHttpUrl(claimUrl) ? qrSvg(claimUrl) : null}
-      lumaUrl={isHttpUrl(lumaUrl) ? lumaUrl.trim() : null}
-    />
+    <CreditsLauncher>
+      <CreditsWall claim={null} lumaUrl={lumaEventUrl()} />
+    </CreditsLauncher>
   );
 }

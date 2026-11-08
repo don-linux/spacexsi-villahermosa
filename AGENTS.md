@@ -24,6 +24,12 @@ El archivo que entra al repo es el original, en la calidad en que llegó. No lo 
 
 En Next 16, `images.qualities` de `next.config.ts` tiene que incluir ese 90. Si no está en la lista, Next lo acerca a 75. No uses `unoptimized` para saltarte esa compresión.
 
+## Wordmark de SpaceXSI
+
+El SVG de `public/brand/spacexsi/` se centra por su caja, pero su tinta no está centrada en ella: el trazo de la X estira la caja hacia la derecha y las letras quedan a la izquierda, con el centro de masa a 8.47% del ancho a la izquierda del eje.
+
+Donde el wordmark deba verse centrado, ponle `translate: var(--wordmark-ink-shift) 0` (el token está en `src/app/globals.css`). Ese porcentaje se resuelve contra el ancho de la propia caja, así que escala solo, y `translate` no pisa a `transform`. No edites los SVG: son el original de marca.
+
 ## Next.js preferences
 
 ### Build UI once
@@ -74,6 +80,7 @@ Dashboard, login, product, and any later screen reuse these components. When a s
 
 ## How to work in this repo
 
+- Node 26 (`.nvmrc`; `engines` in `package.json` and Vercel use the same). Run `nvm use` and check `node -v` before `pnpm`. On Cursor cloud VMs `/exec-daemon/node` (Node 22) comes first in `PATH`: prepend nvm's v26 `bin` directory. Node 26 has no Corepack: `npm i -g pnpm@12.15.0` (the `packageManager` version).
 - Verify with `pnpm dev`, `pnpm typecheck`, `pnpm lint`, `pnpm test:run`, and `pnpm format`.
 - `next.config.ts` enables Cache Components, Partial Prefetching, and the React Compiler. Read the matching guide in `node_modules/next/dist/docs/` before using dynamic APIs, adding `use cache`, or changing link prefetching. Leave manual `memo` and `useMemo` out unless a measured case needs them.
 - Dark mode is already wired. `Providers` wraps the root layout, `next-themes` sets `attribute="class"`, and `src/app/globals.css` defines the `dark` variant for that class. Keep a single `ThemeProvider`. The default theme is `dark`, not `system`.

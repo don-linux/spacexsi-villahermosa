@@ -1,17 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from 'react';
+import {
+  useEffect,
+  useEffectEvent,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { useResolvedTheme, type ResolvedTheme } from '@/components/providers';
 import { GrokBot } from '@/components/ui/grok-bot';
 import { GrokBotWordmark } from '@/components/ui/grok-bot-wordmark';
 import { HomeIcon } from '@/components/ui/icons';
+import { Pill } from '@/components/ui/pill';
 import { EXPRESSIONS, type ExpressionId } from '@/lib/grok-bot/expressions';
 import { COLORS, SHAPES, type ColorId, type ShapeId } from '@/lib/grok-bot/skins';
 import type { StateId } from '@/lib/grok-bot/states';
 import { cn } from '@/lib/utils';
+
+import type { Claim } from './claim-links';
+import { FOCUS_OUT } from './transitions';
 
 import styles from './credits-wall.module.css';
 
@@ -51,10 +62,10 @@ const subscribeNothing = () => () => {};
 
 /**
  * The credits wall, ported from grok-bot-meetup's `MeetupWall.vue`. The bot changes shape, colour
- * and eyes every few seconds; "Canjear créditos" slides the copy up and brings in the QR, or a
- * notice when no event is running.
+ * and eyes every few seconds; "Canjear créditos" slides the copy up and brings in the QR and a
+ * button with the same link, or a notice when `claim` is null (no event is running).
  */
-export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl: string | null }) {
+export function CreditsWall({ claim, lumaUrl }: { claim: Claim | null; lumaUrl: string | null }) {
   const theme = useResolvedTheme();
   // The bot is drawn on the client only: its colour depends on the theme, unknown to the server.
   const mounted = useSyncExternalStore(
@@ -62,7 +73,7 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
     () => true,
     () => false,
   );
-  const [claim, setClaim] = useState(false);
+  const [qrOpen, setQrOpen] = useState(false);
   const [botState, setBotState] = useState<StateId>('idle');
   const [look, setLook] = useState<Look>({
     shape: 'cercle',
@@ -104,24 +115,24 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
     }, PARTY_MS);
   };
 
-  const openClaim = () => {
-    if (claim) return;
+  const openQr = () => {
+    if (qrOpen) return;
     viewChanged.current = true;
-    setClaim(true);
+    setQrOpen(true);
     party();
     restartMorph();
   };
 
-  const closeClaim = () => {
-    if (!claim) return;
+  const closeQr = () => {
+    if (!qrOpen) return;
     viewChanged.current = true;
-    setClaim(false);
+    setQrOpen(false);
     restartMorph();
     if (!partyRef.current) setBotState('idle');
   };
 
   const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
-    if (event.key === 'Escape') closeClaim();
+    if (event.key === 'Escape') closeQr();
   });
 
   const handleBotClick = () => {
@@ -133,8 +144,17 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
   // Focus follows the view, once `inert` has moved: the button that leads back is the one shown.
   useEffect(() => {
     if (!viewChanged.current) return;
-    (claim ? backRef : claimRef).current?.focus({ preventScroll: true });
-  }, [claim]);
+    (qrOpen ? backRef : claimRef).current?.focus({ preventScroll: true });
+  }, [qrOpen]);
+
+  // Next keeps the pages it leaves hidden, state included. A page left on the QR starts again on
+  // the first view: this cleanup runs when the page is hidden, not only when it unmounts.
+  useLayoutEffect(() => {
+    return () => {
+      viewChanged.current = false;
+      setQrOpen(false);
+    };
+  }, []);
 
   useEffect(() => {
     const morph = window.setInterval(() => {
@@ -151,16 +171,24 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
   }, []);
 
   return (
-    <div className={cn(styles.wall, claim && styles.claimMode)}>
+    <div className={cn(styles.wall, qrOpen && styles.claimMode)}>
       <h1 className="sr-only">Grok Bot · Créditos del meetup {CITY}</h1>
 
-      {/* Always mounted: a transition doesn't play on first style, and unmounting would cut the fade. */}
+      {/* Both Volver controls are always mounted: a transition doesn't play on first style, and unmounting would cut the fade. */}
+      <Link
+        href="/creditos"
+        transitionTypes={[FOCUS_OUT]}
+        className={cn(styles.textLink, styles.exit)}
+        inert={qrOpen}
+      >
+        Volver
+      </Link>
       <button
         ref={backRef}
         type="button"
         className={cn(styles.textLink, styles.back)}
-        inert={!claim}
-        onClick={closeClaim}
+        inert={!qrOpen}
+        onClick={closeQr}
       >
         Volver
       </button>
@@ -206,33 +234,48 @@ export function CreditsWall({ qrSvg, lumaUrl }: { qrSvg: string | null; lumaUrl:
           <div className={styles.anchor}>
             <section className={styles.copy}>
               <GrokBotWordmark className={styles.wordmark} />
-              <p className={styles.place}>{claim ? 'Créditos del meetup' : `Meetup ${CITY}`}</p>
+              <p className={styles.place}>{qrOpen ? 'Créditos del meetup' : `Meetup ${CITY}`}</p>
               <button
                 ref={claimRef}
                 type="button"
                 className={cn(styles.textLink, styles.claim)}
-                aria-expanded={claim}
-                inert={claim}
-                onClick={openClaim}
+                aria-expanded={qrOpen}
+                inert={qrOpen}
+                onClick={openQr}
               >
                 Canjear créditos
               </button>
             </section>
           </div>
 
-          <aside className={styles.reveal} inert={!claim}>
-            {qrSvg ? (
-              <div
-                className={styles.qr}
-                role="img"
-                aria-label="Código QR para canjear créditos"
-                dangerouslySetInnerHTML={{ __html: qrSvg }}
-              />
-            ) : (
-              <p className={styles.noEvent}>
-                Actualmente no hay ningún evento en curso. Cuando lo haya, ¡podrás canjear créditos!
-              </p>
-            )}
+          <aside className={styles.reveal} inert={!qrOpen}>
+            <div className={styles.revealBody}>
+              {claim ? (
+                <>
+                  <div
+                    className={styles.qr}
+                    role="img"
+                    aria-label="Código QR para canjear créditos"
+                    dangerouslySetInnerHTML={{ __html: claim.qrSvg }}
+                  />
+                  <Pill
+                    as="a"
+                    tone="solid"
+                    href={claim.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Canjear ahora
+                    <span className="sr-only">, se abre en otra ventana</span>
+                  </Pill>
+                </>
+              ) : (
+                <p className={styles.noEvent}>
+                  Actualmente no hay ningún evento en curso. Cuando lo haya, ¡podrás canjear
+                  créditos!
+                </p>
+              )}
+            </div>
           </aside>
 
           <div className={styles.scene}>
