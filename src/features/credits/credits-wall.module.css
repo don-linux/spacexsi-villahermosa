@@ -31,11 +31,16 @@
   color: var(--foreground);
 }
 
-.back {
+.back,
+.exit {
   position: absolute;
   top: 1.6rem;
   left: 1.75rem;
   z-index: 3;
+}
+
+/* Leads back to the first view. Shown on the QR view only. */
+.back {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease-out;
@@ -45,6 +50,17 @@
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.35s ease-out 0.25s;
+}
+
+/* Leads back to the launcher. Shown on the first view only, in the place of `.back`. */
+.exit {
+  transition: opacity 0.35s ease-out 0.25s;
+}
+
+.claimMode .exit {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
 }
 
 .corner {
@@ -95,7 +111,8 @@
 
 .top {
   --copy-w: 20rem;
-  --qr-w: min(58vh, 34vw);
+  /* The third term keeps the button under the QR clear of the footer on short screens. */
+  --qr-w: max(11rem, min(58vh, 34vw, calc(87dvh - 19rem)));
   --duo-gap: clamp(1.5rem, 4vw, 4rem);
   --avatar-w: min(68vh, 46rem, 48vw);
   position: relative;
@@ -199,8 +216,19 @@
   pointer-events: auto;
 }
 
+/* The one child of `.reveal`, so the row collapse on small screens has a single box to clip. */
+.revealBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  /* Room for the focus ring of the button, which the collapse clips otherwise. */
+  padding-bottom: 0.25rem;
+}
+
 /* Dark modules on a light card in both themes: many cameras fail on an inverted code. */
 .qr {
+  width: 100%;
   padding: 4%;
   border-radius: 1.5rem;
   background: #ffffff;
@@ -311,7 +339,8 @@
     position: relative;
     left: auto;
     top: auto;
-    width: min(100%, 18rem);
+    /* Same idea as `--qr-w`: on short phones the QR gives up width so the bot and the footer fit. */
+    width: min(100%, 18rem, max(10rem, calc(100dvh - 21rem)));
     margin-inline: auto;
     transform: none;
   }
@@ -367,7 +396,8 @@
   .reveal,
   .copy,
   .avatar,
-  .back {
+  .back,
+  .exit {
     transition: none;
   }
 }
