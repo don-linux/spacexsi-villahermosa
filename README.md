@@ -2,11 +2,16 @@
 
 Sitio en Next.js para SpaceXSI Villahermosa, desplegado en Vercel.
 
+## Requisitos
+
+- Node.js 26, la misma versión de `.nvmrc`, de `engines` en `package.json` y del build de Vercel. Con nvm: `nvm use`.
+- pnpm 12.15, la versión de `packageManager`. Node 26 ya no trae Corepack: `npm i -g pnpm@12.15.0`.
+
 ## Desarrollo
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000).
@@ -29,6 +34,6 @@ El Grok Bot de `/creditos` es un port de [grok-bot-meetup](https://github.com/Ma
 ## Build de producción
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
 ```

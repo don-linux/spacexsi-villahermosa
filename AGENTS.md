@@ -74,6 +74,7 @@ Dashboard, login, product, and any later screen reuse these components. When a s
 
 ## How to work in this repo
 
+- Node 26 (`.nvmrc`; `engines` in `package.json` and Vercel use the same). Run `nvm use` and check `node -v` before `pnpm`. On Cursor cloud VMs `/exec-daemon/node` (Node 22) comes first in `PATH`: prepend nvm's v26 `bin` directory. Node 26 has no Corepack: `npm i -g pnpm@12.15.0` (the `packageManager` version).
 - Verify with `pnpm dev`, `pnpm typecheck`, `pnpm lint`, `pnpm test:run`, and `pnpm format`.
 - `next.config.ts` enables Cache Components, Partial Prefetching, and the React Compiler. Read the matching guide in `node_modules/next/dist/docs/` before using dynamic APIs, adding `use cache`, or changing link prefetching. Leave manual `memo` and `useMemo` out unless a measured case needs them.
 - Dark mode is already wired. `Providers` wraps the root layout, `next-themes` sets `attribute="class"`, and `src/app/globals.css` defines the `dark` variant for that class. Keep a single `ThemeProvider`. The default theme is `dark`, not `system`.
