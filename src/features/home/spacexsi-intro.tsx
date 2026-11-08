@@ -1,19 +1,17 @@
 'use client';
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
-import { RIVE_ARTBOARD, RIVE_SRC, RIVE_STATE_MACHINE, useRiveSettled } from '@/lib/spacexsi-rive';
 import { cn } from '@/lib/utils';
 
-/** A short beat of dark before the Rive logo starts, so the write-on is not lost to the page load. */
-const RIVE_HOLD_MS = 350;
-/** How long the finished Rive mark holds still before the full wordmark fades in. */
-const RIVE_LINGER_MS = 300;
-/** The WASM runtime comes from a CDN; give slow networks a chance before skipping the intro. */
-const RIVE_LOAD_TIMEOUT_MS = 4000;
-/** Must match the `.intro-rive` opacity transition. */
+import { LetterSweep } from './letter-sweep';
+
+/** A short beat of dark before the sweep starts, so the write-on is not lost to the page load. */
+const SWEEP_HOLD_MS = 350;
+/** How long the finished mark holds still before the full wordmark fades in. */
+const SWEEP_LINGER_MS = 300;
+/** Must match the `.intro-sweep` opacity transition. */
 const CROSSFADE_MS = 700;
 /** How long the static wordmark stays on screen before the landing is revealed. */
 const WORDMARK_HOLD_MS = 650;
@@ -31,6 +29,7 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
   const [morph, setMorph] = useState<CSSProperties | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const hasFinished = useRef(false);
+  const lingerTimer = useRef(0);
 
   const finish = useCallback(() => {
     if (hasFinished.current) return;
@@ -40,14 +39,14 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      // The Rive file is drawn for a dark background only, so light mode goes straight to the wordmark.
+      // The sweep is drawn white, so light mode goes straight to the wordmark.
       if (document.documentElement.classList.contains('light')) {
         hasFinished.current = true;
         setPhase('wordmark');
       } else {
         setIsArmed(true);
       }
-    }, RIVE_HOLD_MS);
+    }, SWEEP_HOLD_MS);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -69,7 +68,11 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
     return () => window.clearTimeout(timer);
   }, [phase, onReveal, onDone]);
 
-  const showRive = isArmed && (phase === 'intro' || phase === 'leaving');
+  const showSweep = isArmed && (phase === 'intro' || phase === 'leaving');
+  const settle = useCallback(() => {
+    lingerTimer.current = window.setTimeout(finish, SWEEP_LINGER_MS);
+  }, [finish]);
+  useEffect(() => () => window.clearTimeout(lingerTimer.current), []);
   const showWordmark = phase !== 'intro';
   const isExiting = phase === 'exiting';
 
@@ -99,9 +102,12 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
           </>
         ) : null}
       </div>
-      {showRive ? (
-        <div className="intro-rive-layer">
-          <IntroRive isLeaving={phase === 'leaving'} onDone={finish} />
+      {showSweep ? (
+        <div className="intro-sweep-layer">
+          <LetterSweep
+            className={cn('intro-sweep', phase === 'leaving' && 'intro-sweep-leaving')}
+            onSettled={settle}
+          />
         </div>
       ) : null}
     </div>
@@ -118,31 +124,4 @@ function morphOnto(from: Element | null, to: Element | null): CSSProperties | nu
     transformOrigin: '0 0',
     transform: `translate(${end.left - start.left}px, ${end.top - start.top}px) scale(${end.width / start.width})`,
   };
-}
-
-function IntroRive({ isLeaving, onDone }: { isLeaving: boolean; onDone: () => void }) {
-  const { rive, RiveComponent } = useRive({
-    src: RIVE_SRC,
-    artboard: RIVE_ARTBOARD,
-    stateMachine: RIVE_STATE_MACHINE,
-    autoplay: true,
-    layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
-    onLoadError: onDone,
-  });
-
-  const lingerTimer = useRef(0);
-  const settle = useCallback(() => {
-    lingerTimer.current = window.setTimeout(onDone, RIVE_LINGER_MS);
-  }, [onDone]);
-  useEffect(() => () => window.clearTimeout(lingerTimer.current), []);
-
-  useEffect(() => {
-    if (rive) return;
-    const timer = window.setTimeout(onDone, RIVE_LOAD_TIMEOUT_MS);
-    return () => window.clearTimeout(timer);
-  }, [rive, onDone]);
-
-  useRiveSettled(rive, settle);
-
-  return <RiveComponent className={cn('intro-rive', isLeaving && 'intro-rive-leaving')} />;
 }

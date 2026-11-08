@@ -3,7 +3,7 @@
 import { createContext, use, useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 
-import { usePrefersReducedMotion } from '@/lib/spacexsi-rive';
+import { usePrefersReducedMotion } from '@/lib/motion';
 
 import { SpaceXSIIntro } from './spacexsi-intro';
 

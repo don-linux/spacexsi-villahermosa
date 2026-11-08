@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useResolvedTheme, type ResolvedTheme } from '@/components/providers';
-import { usePrefersReducedMotion } from '@/lib/spacexsi-rive';
+import { usePrefersReducedMotion } from '@/lib/motion';
 
 function pause(video: HTMLVideoElement | null) {
   video?.pause();
