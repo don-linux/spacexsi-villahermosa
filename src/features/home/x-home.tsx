@@ -3,7 +3,7 @@ import type { SVGProps } from 'react';
 import { GrokBotWordmark } from '@/components/ui/grok-bot-wordmark';
 import { Pill } from '@/components/ui/pill';
 
-type AccountLogoKind = 'donlinux' | 'grok-bot' | 'cursor' | 'grok' | 'x';
+type AccountLogoKind = 'donlinux' | 'grok-bot' | 'cursor' | 'grok' | 'grok-mark' | 'x';
 
 type Account = {
   handle: string;
@@ -15,6 +15,7 @@ const ACCOUNTS: Account[] = [
   { handle: 'bot', logo: 'grok-bot' },
   { handle: 'cursor_ai', logo: 'cursor' },
   { handle: 'grok', logo: 'grok' },
+  { handle: 'build', logo: 'grok-mark' },
   { handle: 'X', logo: 'x' },
 ];
 
@@ -101,6 +102,15 @@ function AccountLogo({ kind }: { kind: AccountLogoKind }) {
           onLight="/brand/grok/Grok_Wordmark_Dark.svg"
           width={1024}
           height={400}
+        />
+      );
+    case 'grok-mark':
+      return (
+        <ThemeWordmark
+          onDark="/brand/grok/Grok_Logomark_Light.svg"
+          onLight="/brand/grok/Grok_Logomark_Dark.svg"
+          width={1024}
+          height={1024}
         />
       );
     case 'x':

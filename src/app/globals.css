@@ -304,30 +304,17 @@ html:has([data-intro='pending']) {
     height: 100%;
   }
 
-  /* Two accounts, then three. One row of five once the wordmarks fit. */
+  /* Two columns, then three by two once the wordmarks fit. */
   .x-home-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.75rem 1.25rem;
-  }
-
-  .x-home-grid > :nth-child(-n + 2) {
-    grid-column: span 3;
-  }
-
-  .x-home-grid > :nth-child(n + 3) {
-    grid-column: span 2;
   }
 
   @media (min-width: 64rem) {
     .x-home-grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       column-gap: 1rem;
-    }
-
-    .x-home-grid > :nth-child(-n + 2),
-    .x-home-grid > :nth-child(n + 3) {
-      grid-column: auto;
     }
   }
 
@@ -368,6 +355,11 @@ html:has([data-intro='pending']) {
   /* The Grok file's viewBox has padding above the letters. */
   .x-home-logo img[src*='Grok_Wordmark'] {
     height: 2.15rem;
+  }
+
+  /* Square Grok mark for @build. Same slot height as the X symbol. */
+  .x-home-logo img[src*='Grok_Logomark'] {
+    height: 2.75rem;
   }
 
   .x-home-logo .x-home-logo-x {
