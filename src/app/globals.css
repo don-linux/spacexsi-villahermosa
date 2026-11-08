@@ -9,6 +9,13 @@
   --surface: rgb(17 17 17 / 0.96);
   --surface-shadow: rgb(0 0 0 / 0.7);
   --pill-solid-hover: #e4e4e4;
+  /*
+   * The SpaceXSI wordmark is centered by its box, but its ink is not: the stroke of the X stretches
+   * the box to the right while the letters stay on the left, so the ink's center of mass sits 8.47%
+   * of the width left of the box center. Pushing the box right by this share of its own width
+   * (`translate: var(--wordmark-ink-shift) 0`) puts the ink on the axis.
+   */
+  --wordmark-ink-shift: 8.5%;
   color-scheme: dark;
 }
 

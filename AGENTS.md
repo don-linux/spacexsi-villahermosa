@@ -24,6 +24,12 @@ El archivo que entra al repo es el original, en la calidad en que llegó. No lo 
 
 En Next 16, `images.qualities` de `next.config.ts` tiene que incluir ese 90. Si no está en la lista, Next lo acerca a 75. No uses `unoptimized` para saltarte esa compresión.
 
+## Wordmark de SpaceXSI
+
+El SVG de `public/brand/spacexsi/` se centra por su caja, pero su tinta no está centrada en ella: el trazo de la X estira la caja hacia la derecha y las letras quedan a la izquierda, con el centro de masa a 8.47% del ancho a la izquierda del eje.
+
+Donde el wordmark deba verse centrado, ponle `translate: var(--wordmark-ink-shift) 0` (el token está en `src/app/globals.css`). Ese porcentaje se resuelve contra el ancho de la propia caja, así que escala solo, y `translate` no pisa a `transform`. No edites los SVG: son el original de marca.
+
 ## Next.js preferences
 
 ### Build UI once
