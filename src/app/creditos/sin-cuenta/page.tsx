@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { lumaEventUrl, trialClaim } from '@/features/credits/claim-links';
+import { CreditsFlowTransition } from '@/features/credits/credits-flow-transition';
 import { CreditsWall } from '@/features/credits/credits-wall';
 
 export const metadata: Metadata = {
@@ -10,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function CreditsWithoutAccountPage() {
-  return <CreditsWall claim={trialClaim()} lumaUrl={lumaEventUrl()} />;
+  return (
+    <CreditsFlowTransition>
+      <CreditsWall claim={trialClaim()} lumaUrl={lumaEventUrl()} />
+    </CreditsFlowTransition>
+  );
 }

@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import type { ComponentProps } from 'react';
 import { Activity } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -6,6 +7,19 @@ import type { Claim } from './claim-links';
 import { CreditsWall } from './credits-wall';
 
 vi.mock('@/components/ui/grok-bot', () => ({ GrokBot: () => null }));
+
+// The real Link keeps `transitionTypes` to itself; surface it so the test can read it.
+vi.mock('next/link', () => ({
+  default: ({
+    transitionTypes,
+    children,
+    ...props
+  }: ComponentProps<'a'> & { transitionTypes?: string[] }) => (
+    <a data-transition-types={transitionTypes?.join(' ')} {...props}>
+      {children}
+    </a>
+  ),
+}));
 
 const claim: Claim = {
   url: 'https://example.com/canjear?code=ABC-123',
@@ -57,6 +71,7 @@ describe('CreditsWall with a claim', () => {
     const toFirstView = screen.getByRole('button', { name: 'Volver' });
 
     expect(toLauncher).toHaveAttribute('href', '/creditos');
+    expect(toLauncher).toHaveAttribute('data-transition-types', 'credits-focus-out');
     expect(toLauncher).not.toHaveAttribute('inert');
     expect(toFirstView).toHaveAttribute('inert');
 

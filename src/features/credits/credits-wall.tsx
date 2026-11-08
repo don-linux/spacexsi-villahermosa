@@ -22,6 +22,7 @@ import type { StateId } from '@/lib/grok-bot/states';
 import { cn } from '@/lib/utils';
 
 import type { Claim } from './claim-links';
+import { FOCUS_OUT } from './transitions';
 
 import styles from './credits-wall.module.css';
 
@@ -176,7 +177,7 @@ export function CreditsWall({ claim, lumaUrl }: { claim: Claim | null; lumaUrl: 
       {/* Both Volver controls are always mounted: a transition doesn't play on first style, and unmounting would cut the fade. */}
       <Link
         href="/creditos"
-        transitionTypes={['credits-focus-out']}
+        transitionTypes={[FOCUS_OUT]}
         className={cn(styles.textLink, styles.exit)}
         inert={qrOpen}
       >

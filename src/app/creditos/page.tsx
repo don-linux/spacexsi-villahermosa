@@ -9,14 +9,11 @@ export const metadata: Metadata = {
   description: 'Canjea los créditos del meetup de Grok en Villahermosa.',
 };
 
-// The page behind the menu is the first view of both flows, inert and under a blurred veil.
+// The page behind the menu is the first view of both flows.
 export default function CreditsPage() {
   return (
-    <>
-      <div inert>
-        <CreditsWall claim={null} lumaUrl={lumaEventUrl()} />
-      </div>
-      <CreditsLauncher />
-    </>
+    <CreditsLauncher>
+      <CreditsWall claim={null} lumaUrl={lumaEventUrl()} />
+    </CreditsLauncher>
   );
 }

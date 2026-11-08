@@ -732,3 +732,98 @@ body:has([data-intro='revealing']) .cursor-playlist {
     visibility: hidden;
   }
 }
+
+/* View transitions: credits */
+
+/*
+ * React drops the root snapshot of a navigation, so each layer that moves is a group of its own:
+ * the backdrop (wall and veil), the cards, and the wall of each flow. The animations hold on the
+ * layer underneath until the one on top has fully faded in; two fades at once would dip to the
+ * page background.
+ */
+
+/* Launcher to flow: the sharp wall comes into focus over the blurred backdrop. */
+::view-transition-old(.credits-backdrop-out) {
+  animation: none;
+}
+
+::view-transition-new(.credits-wall-in) {
+  animation: credits-focus-in 480ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+::view-transition-old(.credits-cards-out) {
+  animation: credits-cards-out 220ms ease-in both;
+}
+
+/* Flow to launcher: the wall loses focus under the backdrop, then the cards come back. */
+::view-transition-old(.credits-wall-out) {
+  animation: credits-focus-out 480ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+::view-transition-new(.credits-backdrop-in) {
+  animation: credits-backdrop-in 480ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+::view-transition-new(.credits-cards-in) {
+  animation: credits-cards-in 380ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+/* Fixed and always on screen: its own group keeps the groups above from covering it, and the old snapshot stays hidden so the two do not add up. */
+.cursor-playlist {
+  view-transition-name: cursor-playlist;
+}
+
+::view-transition-group(cursor-playlist) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(cursor-playlist) {
+  display: none;
+}
+
+::view-transition-new(cursor-playlist) {
+  animation: none;
+}
+
+@keyframes credits-focus-in {
+  from {
+    opacity: 0;
+    filter: blur(20px);
+  }
+}
+
+@keyframes credits-focus-out {
+  to {
+    filter: blur(24px);
+  }
+}
+
+@keyframes credits-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes credits-cards-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+
+@keyframes credits-cards-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
