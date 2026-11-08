@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
+import { LetterSweep } from '@/components/ui/letter-sweep';
+import { WORDMARK_SWEEP } from '@/components/ui/letter-sweep-frames';
 import { cn } from '@/lib/utils';
-
-import { LetterSweep } from './letter-sweep';
 
 /** A short beat of dark before the sweep starts, so the write-on is not lost to the page load. */
 const SWEEP_HOLD_MS = 350;
@@ -105,6 +105,7 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
       {showSweep ? (
         <div className="intro-sweep-layer">
           <LetterSweep
+            sweep={WORDMARK_SWEEP}
             className={cn('intro-sweep', phase === 'leaving' && 'intro-sweep-leaving')}
             onSettled={settle}
           />

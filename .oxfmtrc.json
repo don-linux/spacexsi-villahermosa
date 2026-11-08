@@ -16,6 +16,6 @@
     "dist/**",
     "build/**",
     "pnpm-lock.yaml",
-    "src/features/home/letter-sweep-frames.ts"
+    "src/components/ui/letter-sweep-frames.ts"
   ]
 }

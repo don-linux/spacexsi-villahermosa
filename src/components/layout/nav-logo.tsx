@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useResolvedTheme } from '@/components/providers';
+import { LetterSweep } from '@/components/ui/letter-sweep';
+import { MARK_SWEEP } from '@/components/ui/letter-sweep-frames';
 import { useLandingRevealed } from '@/features/home/intro-gate';
-import { LetterSweep } from '@/features/home/letter-sweep';
 import { usePrefersReducedMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 
@@ -13,7 +14,7 @@ import { cn } from '@/lib/utils';
 const MARK_HEIGHT = 20;
 /** `spacexsi-symbol-*-transparent.svg` viewBox is 2176×831. */
 const MARK_WIDTH = (MARK_HEIGHT * 2176) / 831;
-/** Lets the navbar fade in before the letters start sweeping into the mark. */
+/** Lets the navbar fade in before the mark starts drawing. */
 const START_DELAY_MS = 250;
 
 type Mode = 'waiting' | 'playing' | 'settled' | 'static';
@@ -52,7 +53,7 @@ export function NavLogo() {
             className={cn('nav-mark-sweep', effectiveMode === 'settled' && 'nav-mark-sweep-out')}
           >
             <LetterSweep
-              crop="mark"
+              sweep={MARK_SWEEP}
               className="absolute inset-0 h-full w-full"
               onSettled={handleSettled}
             />

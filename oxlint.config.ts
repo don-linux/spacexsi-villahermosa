@@ -61,7 +61,7 @@ export default defineConfig({
     'build/**',
     'out/**',
     'next-env.d.ts',
-    'src/features/home/letter-sweep-frames.ts',
+    'src/components/ui/letter-sweep-frames.ts',
   ],
   options: {
     typeAware: true,
