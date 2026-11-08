@@ -239,11 +239,15 @@ html:has([data-intro='pending']) {
     white-space: nowrap;
   }
 
-  /* The intro glides onto this lockup. Same aspect as the wordmark viewBox. */
+  /*
+   * The intro glides onto this lockup. Same aspect as the wordmark viewBox. The shift centers the
+   * ink, not the box, and the 85% cap keeps the tip of the X off the viewport edge on phones.
+   */
   .hero-wordmark {
     position: relative;
-    width: min(100%, 34rem);
+    width: min(85%, 34rem);
     aspect-ratio: 147 / 19;
+    translate: var(--wordmark-ink-shift) 0;
   }
 
   .hero-wordmark img {
