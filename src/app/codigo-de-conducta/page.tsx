@@ -226,15 +226,15 @@ function BrandLockup() {
       <img
         src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
         alt="SpaceXSI"
-        width={1294}
-        height={158}
+        width={147}
+        height={19}
         className="theme-dark-only h-7 w-auto sm:h-9"
       />
       <img
         src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
         alt="SpaceXSI"
-        width={1294}
-        height={158}
+        width={147}
+        height={19}
         className="theme-light-only h-7 w-auto sm:h-9"
       />
     </div>

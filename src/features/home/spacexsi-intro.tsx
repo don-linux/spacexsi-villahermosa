@@ -86,15 +86,15 @@ export function SpaceXSIIntro({ onReveal, onDone }: { onReveal: () => void; onDo
               className="spacexsi-wordmark theme-dark-only"
               src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
               alt=""
-              width={1294}
-              height={158}
+              width={147}
+              height={19}
             />
             <img
               className="spacexsi-wordmark theme-light-only"
               src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
               alt=""
-              width={1294}
-              height={158}
+              width={147}
+              height={19}
             />
           </>
         ) : null}

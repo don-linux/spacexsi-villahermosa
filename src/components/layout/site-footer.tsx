@@ -45,15 +45,15 @@ export function SiteFooter() {
             <img
               src="/brand/spacexsi/spacexsi-wordmark-white-transparent.svg"
               alt="SpaceXSI"
-              width={1294}
-              height={158}
+              width={147}
+              height={19}
               className="theme-dark-only h-4 w-auto"
             />
             <img
               src="/brand/spacexsi/spacexsi-wordmark-black-transparent.svg"
               alt="SpaceXSI"
-              width={1294}
-              height={158}
+              width={147}
+              height={19}
               className="theme-light-only h-4 w-auto"
             />
           </Link>

@@ -64,7 +64,7 @@ html:has([data-intro='pending']) {
 
 .spacexsi-stage {
   width: clamp(240px, 54vw, 640px);
-  aspect-ratio: 1294 / 158;
+  aspect-ratio: 147 / 19;
   transition:
     transform 900ms cubic-bezier(0.65, 0, 0.25, 1),
     opacity 500ms ease;
@@ -214,18 +214,24 @@ html:has([data-intro='pending']) {
 
   .hero-title {
     font-family: var(--font-display), var(--font-sans);
-    font-size: clamp(2.25rem, 1rem + 4.4vw, 4.25rem);
+    /* One line inside the hero padding. The divisor matches the sentence width. */
+    font-size: min(3.5rem, calc((100vw - 4rem) / 19));
     line-height: 1.08;
+    white-space: nowrap;
   }
 
-  /* Letter height ~= the font's cap height; the swoosh rises above it. */
+  /* The intro glides onto this lockup. Same aspect as the wordmark viewBox. */
   .hero-wordmark {
-    display: inline-block;
-    height: 1.02em;
-    width: auto;
-    aspect-ratio: 1294 / 158;
-    margin-inline: 0.06em;
-    vertical-align: baseline;
+    position: relative;
+    width: min(100%, 34rem);
+    aspect-ratio: 147 / 19;
+  }
+
+  .hero-wordmark img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   /* Replaces the words "Grok Bot" inside the cradle heading. */
