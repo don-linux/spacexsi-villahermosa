@@ -20,8 +20,8 @@ import { cn } from '@/lib/utils';
 
 /** Rendered height of the X mark in the navbar, in px. */
 const MARK_HEIGHT = 20;
-/** `mark-white.svg` is 413x158. */
-const MARK_WIDTH = (MARK_HEIGHT * 413) / 158;
+/** `spacexsi-symbol-*-transparent.svg` viewBox is 2176×831. */
+const MARK_WIDTH = (MARK_HEIGHT * 2176) / 831;
 /** Lets the navbar fade in before the letters start sweeping into the mark. */
 const START_DELAY_MS = 250;
 /** The runtime and .riv are usually cached by the intro; fall back to the static mark if not. */
@@ -71,25 +71,13 @@ export function NavLogo() {
       aria-label="SpaceXSI Villahermosa, inicio"
     >
       <span className="relative block shrink-0" style={{ width: MARK_WIDTH, height: MARK_HEIGHT }}>
-        {effectiveMode === 'static' ? (
-          <>
-            <img
-              src="/brand/spacexsi/mark-white.svg"
-              alt=""
-              width={MARK_WIDTH}
-              height={MARK_HEIGHT}
-              className="theme-dark-only block h-full w-full"
-            />
-            <img
-              src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
-              alt=""
-              width={MARK_WIDTH}
-              height={MARK_HEIGHT}
-              className="theme-light-only block h-full w-full object-contain"
-            />
-          </>
-        ) : isArmed ? (
-          <NavRive onPlay={handlePlay} onSettled={handleSettled} onFail={handleFail} />
+        {effectiveMode !== 'static' && isArmed ? (
+          <span className={cn('nav-mark-rive', effectiveMode === 'settled' && 'nav-mark-rive-out')}>
+            <NavRive onPlay={handlePlay} onSettled={handleSettled} onFail={handleFail} />
+          </span>
+        ) : null}
+        {effectiveMode === 'static' || effectiveMode === 'settled' ? (
+          <Mark fadeIn={effectiveMode === 'settled'} />
         ) : null}
       </span>
       <span
@@ -102,6 +90,27 @@ export function NavLogo() {
         </span>
       </span>
     </Link>
+  );
+}
+
+function Mark({ fadeIn }: { fadeIn: boolean }) {
+  return (
+    <span className={cn('absolute inset-0', fadeIn && 'nav-mark-in')}>
+      <img
+        src="/brand/spacexsi/spacexsi-symbol-white-transparent.svg"
+        alt=""
+        width={2176}
+        height={831}
+        className="theme-dark-only block h-full w-full"
+      />
+      <img
+        src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
+        alt=""
+        width={2176}
+        height={831}
+        className="theme-light-only block h-full w-full"
+      />
+    </span>
   );
 }
 

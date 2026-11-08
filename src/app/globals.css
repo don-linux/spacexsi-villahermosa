@@ -131,6 +131,18 @@ html:has([data-intro='pending']) {
     transition-duration: 500ms;
   }
 
+  .nav-mark-rive {
+    transition: opacity 500ms ease;
+  }
+
+  .nav-mark-rive-out {
+    opacity: 0;
+  }
+
+  .nav-mark-in {
+    animation: fadeIn 500ms ease both;
+  }
+
   .nav-link {
     display: inline-flex;
     align-items: center;
