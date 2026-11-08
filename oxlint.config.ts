@@ -54,7 +54,15 @@ export default defineConfig({
     'react/use-memo': 'off',
     'react/void-use-memo': 'off',
   },
-  ignorePatterns: ['node_modules/**', '.next/**', 'dist/**', 'build/**', 'out/**', 'next-env.d.ts'],
+  ignorePatterns: [
+    'node_modules/**',
+    '.next/**',
+    'dist/**',
+    'build/**',
+    'out/**',
+    'next-env.d.ts',
+    'src/components/ui/letter-sweep-frames.ts',
+  ],
   options: {
     typeAware: true,
   },

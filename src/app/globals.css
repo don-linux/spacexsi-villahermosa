@@ -81,7 +81,7 @@ html:has([data-intro='pending']) {
   animation: fadeIn 700ms ease both;
 }
 
-.intro-rive-layer {
+.intro-sweep-layer {
   position: absolute;
   inset: 0;
   display: flex;
@@ -90,13 +90,13 @@ html:has([data-intro='pending']) {
   pointer-events: none;
 }
 
-.intro-rive {
+.intro-sweep {
   width: clamp(240px, 54vw, 640px);
   aspect-ratio: 1389 / 257;
   transition: opacity 700ms ease;
 }
 
-.intro-rive-leaving {
+.intro-sweep-leaving {
   opacity: 0;
 }
 
@@ -129,6 +129,18 @@ html:has([data-intro='pending']) {
     opacity: 1;
     transform: none;
     transition-duration: 500ms;
+  }
+
+  .nav-mark-sweep {
+    transition: opacity 500ms ease;
+  }
+
+  .nav-mark-sweep-out {
+    opacity: 0;
+  }
+
+  .nav-mark-in {
+    animation: fadeIn 500ms ease both;
   }
 
   .nav-link {

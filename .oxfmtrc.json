@@ -9,5 +9,13 @@
     "functions": ["clsx", "cn", "cva"],
     "stylesheet": "./src/app/globals.css"
   },
-  "ignorePatterns": [".next/**", ".agents/**", "node_modules/**", "dist/**", "build/**", "pnpm-lock.yaml"]
+  "ignorePatterns": [
+    ".next/**",
+    ".agents/**",
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    "pnpm-lock.yaml",
+    "src/components/ui/letter-sweep-frames.ts"
+  ]
 }

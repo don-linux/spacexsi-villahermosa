@@ -7,7 +7,7 @@ import { GrokBot } from '@/components/ui/grok-bot';
 import { GrokBotWordmark } from '@/components/ui/grok-bot-wordmark';
 import type { ExpressionId } from '@/lib/grok-bot/expressions';
 import type { ColorId, ShapeId } from '@/lib/grok-bot/skins';
-import { usePrefersReducedMotion } from '@/lib/spacexsi-rive';
+import { usePrefersReducedMotion } from '@/lib/motion';
 
 const COLORS = ['rose', 'orange', 'vert', 'bleu', 'violet'] as const satisfies readonly ColorId[];
 

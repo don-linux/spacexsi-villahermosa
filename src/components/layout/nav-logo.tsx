@@ -1,45 +1,21 @@
 'use client';
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import type { CSSProperties } from 'react';
 
 import { useResolvedTheme } from '@/components/providers';
+import { LetterSweep } from '@/components/ui/letter-sweep';
+import { MARK_SWEEP } from '@/components/ui/letter-sweep-frames';
 import { useLandingRevealed } from '@/features/home/intro-gate';
-import {
-  RIVE_ARTBOARD,
-  RIVE_ARTBOARD_SIZE,
-  RIVE_MARK_BOX,
-  RIVE_SRC,
-  RIVE_STATE_MACHINE,
-  usePrefersReducedMotion,
-  useRiveSettled,
-} from '@/lib/spacexsi-rive';
+import { usePrefersReducedMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 
 /** Rendered height of the X mark in the navbar, in px. */
 const MARK_HEIGHT = 20;
-/** `mark-white.svg` is 413x158. */
-const MARK_WIDTH = (MARK_HEIGHT * 413) / 158;
-/** Lets the navbar fade in before the letters start sweeping into the mark. */
+/** `spacexsi-symbol-*-transparent.svg` viewBox is 2176×831. */
+const MARK_WIDTH = (MARK_HEIGHT * 2176) / 831;
+/** Lets the navbar fade in before the mark starts drawing. */
 const START_DELAY_MS = 250;
-/** The runtime and .riv are usually cached by the intro; fall back to the static mark if not. */
-const LOAD_TIMEOUT_MS = 2500;
-
-/**
- * The artboard is much wider than the mark it settles on, so the canvas is scaled until that
- * mark is `MARK_HEIGHT` tall and offset so it lands exactly where the static mark would be.
- */
-const scale = MARK_HEIGHT / RIVE_MARK_BOX.height;
-const canvasStyle: CSSProperties = {
-  position: 'absolute',
-  left: -RIVE_MARK_BOX.x * scale,
-  top: -RIVE_MARK_BOX.y * scale,
-  width: RIVE_ARTBOARD_SIZE.width * scale,
-  height: RIVE_ARTBOARD_SIZE.height * scale,
-  pointerEvents: 'none',
-};
 
 type Mode = 'waiting' | 'playing' | 'settled' | 'static';
 
@@ -52,15 +28,16 @@ export function NavLogo() {
 
   useEffect(() => {
     if (!revealed || reduceMotion) return;
-    const timer = window.setTimeout(() => setIsArmed(true), START_DELAY_MS);
+    const timer = window.setTimeout(() => {
+      setIsArmed(true);
+      setMode('playing');
+    }, START_DELAY_MS);
     return () => window.clearTimeout(timer);
   }, [revealed, reduceMotion]);
 
-  const handlePlay = useCallback(() => setMode('playing'), []);
   const handleSettled = useCallback(() => setMode('settled'), []);
-  const handleFail = useCallback(() => setMode('static'), []);
 
-  // The Rive mark is white-only, so light mode keeps the static black symbol.
+  // The sweep is white-only, so light mode keeps the static black symbol.
   const effectiveMode: Mode = reduceMotion || theme === 'light' ? 'static' : mode;
   const showLabel = effectiveMode === 'settled' || effectiveMode === 'static';
 
@@ -71,25 +48,19 @@ export function NavLogo() {
       aria-label="SpaceXSI Villahermosa, inicio"
     >
       <span className="relative block shrink-0" style={{ width: MARK_WIDTH, height: MARK_HEIGHT }}>
-        {effectiveMode === 'static' ? (
-          <>
-            <img
-              src="/brand/spacexsi/mark-white.svg"
-              alt=""
-              width={MARK_WIDTH}
-              height={MARK_HEIGHT}
-              className="theme-dark-only block h-full w-full"
+        {effectiveMode !== 'static' && isArmed ? (
+          <span
+            className={cn('nav-mark-sweep', effectiveMode === 'settled' && 'nav-mark-sweep-out')}
+          >
+            <LetterSweep
+              sweep={MARK_SWEEP}
+              className="absolute inset-0 h-full w-full"
+              onSettled={handleSettled}
             />
-            <img
-              src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
-              alt=""
-              width={MARK_WIDTH}
-              height={MARK_HEIGHT}
-              className="theme-light-only block h-full w-full object-contain"
-            />
-          </>
-        ) : isArmed ? (
-          <NavRive onPlay={handlePlay} onSettled={handleSettled} onFail={handleFail} />
+          </span>
+        ) : null}
+        {effectiveMode === 'static' || effectiveMode === 'settled' ? (
+          <Mark fadeIn={effectiveMode === 'settled'} />
         ) : null}
       </span>
       <span
@@ -105,32 +76,23 @@ export function NavLogo() {
   );
 }
 
-function NavRive({
-  onPlay,
-  onSettled,
-  onFail,
-}: {
-  onPlay: () => void;
-  onSettled: () => void;
-  onFail: () => void;
-}) {
-  const { rive, RiveComponent } = useRive({
-    src: RIVE_SRC,
-    artboard: RIVE_ARTBOARD,
-    stateMachine: RIVE_STATE_MACHINE,
-    autoplay: true,
-    layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
-    onLoad: onPlay,
-    onLoadError: onFail,
-  });
-
-  useEffect(() => {
-    if (rive) return;
-    const timer = window.setTimeout(onFail, LOAD_TIMEOUT_MS);
-    return () => window.clearTimeout(timer);
-  }, [rive, onFail]);
-
-  useRiveSettled(rive, onSettled);
-
-  return <RiveComponent aria-hidden style={canvasStyle} />;
+function Mark({ fadeIn }: { fadeIn: boolean }) {
+  return (
+    <span className={cn('absolute inset-0', fadeIn && 'nav-mark-in')}>
+      <img
+        src="/brand/spacexsi/spacexsi-symbol-white-transparent.svg"
+        alt=""
+        width={2176}
+        height={831}
+        className="theme-dark-only block h-full w-full"
+      />
+      <img
+        src="/brand/spacexsi/spacexsi-symbol-black-transparent.svg"
+        alt=""
+        width={2176}
+        height={831}
+        className="theme-light-only block h-full w-full"
+      />
+    </span>
+  );
 }

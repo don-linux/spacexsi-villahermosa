@@ -166,9 +166,6 @@ importers:
 
   .:
     dependencies:
-      '@rive-app/react-canvas':
-        specifier: ^4.36.0
-        version: 4.37.1(react@19.3.0)
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1(next@16.4.5(@babel/core@7.29.13)(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
@@ -1404,14 +1401,6 @@ packages:
     resolution: {integrity: sha512-+TuHfVgpK1SIlwyV7bcZ9SRRhnVOAIwJwxZCgEh5LWkZuyGfSYnHNx8J7H78dhCwMyLkJtGb/j5XICjzEKzrfg==}
     engines: {node: '>=18'}
     hasBin: true
-
-  '@rive-app/canvas@2.45.1':
-    resolution: {integrity: sha512-VWOO1hHCMB3YKp3L2R1FqfobtreoAnMzpen9ngxTn6mNZj4KJEOW6lF7RhuVQkspN4t7BUCsGzBnEpZOFUHvyw==}
-
-  '@rive-app/react-canvas@4.37.1':
-    resolution: {integrity: sha512-gA50ajL3igvr192QOtafRkRP9gcBDTN7hp3s90SA7q1t0T3pjXA3T9j7RDKaKM3wt7O0Vt30rPwiuH6EqfGv+A==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
     resolution: {integrity: sha512-ia3DwAs0OsMGS7+IConptSiyk9pEXkOx/AbJ2n/lAGxH3QkWQus1t8d7gnAT38FCU2sQu8lUbeR6AiZFv4JxaA==}
@@ -3621,13 +3610,6 @@ snapshots:
     dependencies:
       playwright: 1.65.0-alpha-2026-10-30
       playwright-core: 1.65.0-alpha-2026-10-30
-
-  '@rive-app/canvas@2.45.1': {}
-
-  '@rive-app/react-canvas@4.37.1(react@19.3.0)':
-    dependencies:
-      '@rive-app/canvas': 2.45.1
-      react: 19.3.0
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
     optional: true
