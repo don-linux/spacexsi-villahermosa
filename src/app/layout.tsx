@@ -30,9 +30,25 @@ const universalDisplay = localFont({
   variable: '--font-display',
 });
 
+const PRODUCTION_ORIGIN = 'https://spacexsi-villahermosa.vercel.app';
+
+function siteOrigin(): string {
+  if (process.env.VERCEL_ENV !== 'preview') return PRODUCTION_ORIGIN;
+  const host = process.env.VERCEL_URL;
+  if (!host) return PRODUCTION_ORIGIN;
+  const origin = `https://${host}`;
+  return URL.canParse(origin) ? origin : PRODUCTION_ORIGIN;
+}
+
+const metadataBase = new URL(siteOrigin());
+
 export const metadata: Metadata = {
+  metadataBase,
   title: 'SpaceXSI Villahermosa',
   description: 'SpaceXSI Villahermosa',
+  twitter: {
+    card: 'summary_large_image',
+  },
 };
 
 export const viewport: Viewport = {
