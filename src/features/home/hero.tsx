@@ -5,9 +5,9 @@ import { ArrowUpRightIcon } from '@/components/ui/icons';
 import { Pill } from '@/components/ui/pill';
 import { upcomingEvents } from '@/features/events/upcoming';
 
-const CURSOR_MEETUP_SLUG = 'cursor-meetup-villahermosa-2026-11';
-const cursorMeetup = upcomingEvents.find((event) => event.slug === CURSOR_MEETUP_SLUG);
-const CURSOR_MEETUP_HREF = cursorMeetup ? `/eventos/proximos/${cursorMeetup.slug}` : '#';
+const FEATURED_MEETUP_SLUG = 'grok-bot-para-padres-villahermosa-2026-11';
+const featuredMeetup = upcomingEvents.find((event) => event.slug === FEATURED_MEETUP_SLUG);
+const FEATURED_MEETUP_HREF = featuredMeetup ? `/eventos/proximos/${featuredMeetup.slug}` : '#';
 
 function revealDelay(ms: number) {
   return { '--reveal-delay': `${ms}ms` } as CSSProperties;
@@ -19,15 +19,15 @@ export function Hero() {
       <div className="hero-glow" aria-hidden />
 
       <Link
-        href={CURSOR_MEETUP_HREF}
+        href={FEATURED_MEETUP_HREF}
         className="reveal group inline-flex items-center gap-2.5 rounded-full border border-foreground/10 bg-foreground/[0.04] py-1 pr-3 pl-1 text-[13px] transition-colors hover:border-foreground/20 hover:bg-foreground/[0.07]"
         style={revealDelay(120)}
       >
         <span className="rounded-full bg-foreground/[0.08] px-2 py-0.5 text-[12px] font-medium text-orange-600 dark:text-orange-400">
           Nuevo
         </span>
-        <span className="font-medium text-foreground">Cursor Meetup</span>
-        <span className="text-foreground/50">Noviembre 12</span>
+        <span className="font-medium text-foreground">Grok Bot Para Padres</span>
+        <span className="text-foreground/50">Noviembre 20</span>
         <ArrowUpRightIcon className="size-3.5 text-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
 
