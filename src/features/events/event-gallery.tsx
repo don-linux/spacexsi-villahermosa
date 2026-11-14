@@ -94,6 +94,7 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                 alt={photos[0].alt}
                 fill
                 sizes="(min-width: 1152px) 72rem, 100vw"
+                quality={photos[0].quality}
                 className="object-cover"
               />
             </button>
@@ -111,6 +112,7 @@ export function EventGallery({ flyers, photos }: { flyers: EventFlyer[]; photos:
                         alt={photo.alt}
                         fill
                         sizes="(min-width: 720px) 18rem, 50vw"
+                        quality={photo.quality}
                         className="object-cover"
                       />
                     </button>
