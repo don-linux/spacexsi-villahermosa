@@ -1,9 +1,11 @@
 import { grokBotMeetupVillahermosa } from './2026-10-grok-bot-meetup-villahermosa/event';
 import { cursorMeetupVillahermosa } from './2026-11-cursor-meetup-villahermosa/event';
+import { hackatonNacionalVillahermosa } from './2026-11-hackaton-nacional-villahermosa/event';
 import type { PastEvent } from './types';
 
 /** Newest first. A new meetup is a folder plus one line here. */
 export const pastEvents: readonly PastEvent[] = [
+  hackatonNacionalVillahermosa,
   cursorMeetupVillahermosa,
   grokBotMeetupVillahermosa,
 ];
